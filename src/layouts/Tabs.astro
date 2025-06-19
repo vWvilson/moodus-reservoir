@@ -1,0 +1,414 @@
+---
+import { ClientRouter } from "astro:transitions";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="https://slater.app/10324/23333.css" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <ClientRouter />
+    <title>Astro</title>
+    <style is:global>
+      /* ------- Osmo [https://osmo.supply/] ------- */
+      /* Osmo UI: https://slater.app/10324/23333.css */
+
+      body {
+        /* background-color: var(--color-black); */
+        /* color: var(--color-light); */
+        font-size: var(--size-font);
+        font-family: arial, sans-serif;
+      }
+      ::-moz-selection {
+        /* Code for Firefox */
+        color: white;
+        background: #0C59B5;;
+      }
+
+      ::selection {
+        color: white;
+        background: #0C59B5;;
+      }
+      .cloneable {
+        padding: var(--container-padding);
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        display: flex;
+        position: relative;
+        font-size: 1.1vw;
+      }
+
+      .tab-container {
+        grid-column-gap: 3em;
+        grid-row-gap: 3em;
+        flex-flow: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        min-height: 100%;
+        padding-top: 0;
+        padding-bottom: 0;
+        padding-right: 2.5em;
+        display: flex;
+      }
+
+      .tab-layout-container {
+        width: 100%;
+        max-width: 36em;
+        height: 100%;
+        margin-left: auto;
+        margin-right: 0;
+        padding-top: 1em;
+        padding-bottom: 2em;
+      }
+
+      .tab-container-bottom {
+        grid-column-gap: 2em;
+        grid-row-gap: 2em;
+        flex-flow: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        display: flex;
+      }
+
+      .tab-container-top {
+        grid-column-gap: 2em;
+        grid-row-gap: 2em;
+        flex-flow: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        display: flex;
+      }
+
+      .tab-layout-col {
+        width: 50%;
+      }
+
+      .tab-content-wrap {
+        width: 100%;
+        min-width: 24em;
+        position: relative;
+      }
+
+      .content-button__bg {
+        z-index: -1;
+        background-color: #efeeec;
+        border-radius: 0.25em;
+        position: absolute;
+        inset: 0%;
+      }
+
+      .content-p {
+        margin: 0;
+        font-size: 1.25em;
+        line-height: 1.4;
+      }
+
+      .tab-button__bg {
+        z-index: 0;
+        background-color: #efeeec0f;
+        border: 1px solid #efeeec14;
+        border-radius: 0.25em;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        inset: 0%;
+      }
+
+      .tab-content-item {
+        z-index: 1;
+        grid-column-gap: 1.25em;
+        grid-row-gap: 1.25em;
+        visibility: hidden;
+        flex-flow: column;
+        display: flex;
+        position: absolute;
+        top: -28vh;
+        /* inset: 28% 0% 0%; */
+      }
+
+      .tab-content-item.active {
+        visibility: visible;
+      }
+
+      .tab-layout {
+        z-index: 1;
+        grid-row-gap: 3em;
+        flex-flow: wrap;
+        width: 100%;
+        min-height: 37em;
+        display: flex;
+        position: relative;
+      }
+
+      /* .filter-bar {
+        background-color: #efeeec0f;
+        border: 1px solid #efeeec14;
+        border-radius: 0.5em;
+        padding: 0.5em;
+        display: flex;
+      }
+
+      .filter-button {
+        background-color: #0000;
+        border: 1px solid #efeeec00;
+        padding: 1.125em 1.5em;
+        transition: border-color 0.2s;
+        position: relative;
+      }
+
+      .filter-button.active {
+        border-color: #efeeec4d;
+        border-radius: 0.25em;
+      } */
+      .filter-bar {
+        background-color: #0056b8ee; /* Semi-transparent variation */
+        border: 1px solid #004a9f; /* Slightly darker blue */
+        border-radius: 0.5em;
+        padding: 0.5em;
+        display: flex;
+      }
+
+      .filter-button {
+        background-color: transparent;
+        border: 1px solid #0057b800; /* Transparent but can be adjusted */
+        padding: 1.125em 1.5em;
+        transition: border-color 0.2s;
+        position: relative;
+      }
+
+      .filter-button.active {
+        border-color: #003f8a47; /* Darker blue with transparency */
+        border-radius: 0.25em;
+      }
+
+      .filter-button__p {
+        z-index: 1;
+        font-size: 1.125em;
+        position: relative;
+        color: var(--color-light);
+      }
+
+      .tab-visual-wrap {
+        border-radius: 0.5em;
+        width: 100%;
+        height: 42em;
+        max-height: 80vh;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .tab-visual-item {
+        visibility: hidden;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        position: absolute;
+      }
+
+      .tab-visual-item.active {
+        visibility: visible;
+      }
+
+      .tab-image {
+        object-fit: cover;
+        border-radius: 0.5em;
+        width: 100%;
+        max-width: none;
+        height: 100%;
+      }
+
+      .tab-content__heading {
+        letter-spacing: -0.02em;
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size: 1.75em;
+        font-weight: 500;
+        line-height: 1;
+      }
+
+      .tab-layout-heading {
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size: 4em;
+        font-weight: 500;
+        line-height: 1;
+      }
+
+      .tab-content__button {
+        color: #131313;
+        justify-content: center;
+        align-items: center;
+        height: 4em;
+        padding-left: 1.5em;
+        padding-right: 1.5em;
+        text-decoration: none;
+        display: flex;
+        position: relative;
+      }
+    </style>
+  </head>
+  <body>
+    <slot />
+    <script>
+      import gsap from "gsap";
+      import { ScrollTrigger } from "gsap/ScrollTrigger";
+      import { CustomEase } from "gsap/CustomEase";
+
+      import { Flip } from "gsap/Flip";
+
+      gsap.registerPlugin(CustomEase, Flip);
+
+      CustomEase.create("osmo-ease", "0.625, 0.05, 0, 1");
+
+      gsap.defaults({
+        ease: "osmo-ease",
+        duration: 0.8,
+      });
+
+      function initFlipButtons() {
+        let wrappers = document.querySelectorAll('[data-flip-button="wrap"]');
+
+        wrappers.forEach((wrapper) => {
+          let buttons = wrapper.querySelectorAll('[data-flip-button="button"]');
+          let bg = wrapper.querySelector('[data-flip-button="bg"]');
+
+          buttons.forEach(function (button) {
+            // Handle mouse enter
+            button.addEventListener("mouseenter", function () {
+              const state = Flip.getState(bg);
+              this.appendChild(bg);
+              Flip.from(state, {
+                duration: 0.4,
+              });
+            });
+
+            // Handle focus for keyboard navigation
+            button.addEventListener("focus", function () {
+              const state = Flip.getState(bg);
+              this.appendChild(bg);
+              Flip.from(state, {
+                duration: 0.4,
+              });
+            });
+
+            // Handle mouse leave
+            button.addEventListener("mouseleave", function () {
+              const state = Flip.getState(bg);
+              const activeLink = wrapper.querySelector(".active");
+              activeLink.appendChild(bg);
+              Flip.from(state, {
+                duration: 0.4,
+              });
+            });
+
+            // Handle blur to reset background for keyboard navigation
+            button.addEventListener("blur", function () {
+              const state = Flip.getState(bg);
+              const activeLink = wrapper.querySelector(".active");
+              activeLink.appendChild(bg);
+              Flip.from(state, {
+                duration: 0.4,
+              });
+            });
+          });
+        });
+      }
+
+      function initTabSystem() {
+        let wrappers = document.querySelectorAll('[data-tabs="wrapper"]');
+
+        wrappers.forEach((wrapper) => {
+          let nav = wrapper.querySelector('[data-tabs="nav"]');
+          let buttons = nav.querySelectorAll('[data-tabs="button"]');
+          let contentWrap = wrapper.querySelector('[data-tabs="content-wrap"]');
+          let contentItems = contentWrap.querySelectorAll(
+            '[data-tabs="content-item"]'
+          );
+          let visualWrap = wrapper.querySelector('[data-tabs="visual-wrap"]');
+          let visualItems = visualWrap.querySelectorAll(
+            '[data-tabs="visual-item"]'
+          );
+
+          let activeButton = buttons[0];
+          let activeContent = contentItems[0];
+          let activeVisual = visualItems[0];
+          let isAnimating = false;
+
+          function switchTab(index, initial = false) {
+            if (!initial && (isAnimating || buttons[index] === activeButton))
+              return; // ignore click if the clicked button is already active
+            isAnimating = true; // keep track of whether or not one is moving, to prevent overlap
+
+            const outgoingContent = activeContent;
+            const incomingContent = contentItems[index];
+            const outgoingVisual = activeVisual;
+            const incomingVisual = visualItems[index];
+
+            let outgoingLines =
+              outgoingContent.querySelectorAll("[data-tabs-fade]") || [];
+            let incomingLines =
+              incomingContent.querySelectorAll("[data-tabs-fade]");
+
+            const timeline = gsap.timeline({
+              defaults: {
+                ease: "power3.inOut",
+              },
+              onComplete: () => {
+                if (!initial) {
+                  outgoingContent && outgoingContent.classList.remove("active");
+                  outgoingVisual && outgoingVisual.classList.remove("active");
+                }
+                activeContent = incomingContent;
+                activeVisual = incomingVisual;
+                isAnimating = false;
+              },
+            });
+
+            incomingContent.classList.add("active");
+            incomingVisual.classList.add("active");
+
+            timeline
+              .to(outgoingLines, { y: "-2em", autoAlpha: 0 }, 0)
+              .to(outgoingVisual, { autoAlpha: 0, xPercent: 3 }, 0)
+              .fromTo(
+                incomingLines,
+                { y: "2em", autoAlpha: 0 },
+                { y: "0em", autoAlpha: 1, stagger: 0.075 },
+                0.4
+              )
+              .fromTo(
+                incomingVisual,
+                { autoAlpha: 0, xPercent: 3 },
+                { autoAlpha: 1, xPercent: 0 },
+                "<"
+              );
+
+            activeButton && activeButton.classList.remove("active");
+            buttons[index].classList.add("active");
+            activeButton = buttons[index];
+          }
+
+          switchTab(0, true); // on page load
+
+          buttons.forEach((button, i) => {
+            button.addEventListener("click", () => switchTab(i));
+          });
+
+          contentItems[0].classList.add("active");
+          visualItems[0].classList.add("active");
+          buttons[0].classList.add("active");
+        });
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        initTabSystem();
+        initFlipButtons();
+      });
+    </script>
+  </body>
+</html>

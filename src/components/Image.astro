@@ -1,0 +1,20 @@
+---
+import {  urlFor } from "../../nichiha/lib/url-for-image"
+
+const { image, alt } = Astro.props;
+---
+<section class="image">
+  {image && <img src={urlFor(image).url()} alt={alt} />}
+</section>
+
+<style>
+  .image {
+    text-align: center;
+    margin: 2rem 0;
+  } 
+  img {
+    max-width: 100%;
+
+  }
+
+</style>

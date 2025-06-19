@@ -1,0 +1,35 @@
+---
+import { PortableText as PortableTextInternal } from 'astro-portabletext'
+import PortableTextImage from "./PortableTextImage.astro";
+
+// Sanitize function to remove zero-width spaces and similar characters
+const sanitize = (str) => str ? str.replace(/[\u200B-\u200D\uFEFF]/g, '') : '';
+
+const { portableText } = Astro.props;
+
+// Recursively sanitize text fields in Portable Text
+const sanitizePortableText = (blocks) => {
+  return blocks.map(block => {
+    if (block._type === 'block' && Array.isArray(block.children)) {
+      return {
+        ...block,
+        children: block.children.map(child => ({
+          ...child,
+          text: sanitize(child.text)
+        }))
+      };
+    }
+    return block;
+  });
+};
+
+const sanitizedPortableText = sanitizePortableText(portableText);
+
+const components = {
+  type: {
+    image: PortableTextImage,
+  }
+};
+---
+
+<PortableTextInternal value={sanitizedPortableText} components={components} />

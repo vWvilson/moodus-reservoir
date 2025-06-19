@@ -1,0 +1,52 @@
+---
+import { getBlogs } from "../utils/sanity.js";
+import { urlFor } from "../../nichiha/lib/url-for-image";
+import Layout from '../layouts/Layout.astro';
+
+const posts = await getBlogs();
+---
+
+<Layout>
+  <section class="cards">
+    {posts?.length ? 
+      posts.map((post) => (
+        post?.slug && 
+        <div class="card">
+          <img src={urlFor(post.featuredImage).width(300).url()} alt={post.title} />
+          <a href={`/blog/${post.slug.current}`} class="card-link">
+            {post.title}
+          </a>
+
+        </div>
+      ))
+      : <p>No posts found</p>
+    }
+  </section>
+</Layout>
+
+<style>
+  .cards {
+    display: grid;
+    gap: 2rem;
+    padding: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+  
+  .card {
+    display: grid;
+    padding: 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    transition: transform 0.2s;
+    max-width: 300px;
+  }
+  
+  .card:hover {
+    transform: translateY(-2px);
+  }
+  
+  .card-link {
+    text-decoration: none;
+    color: inherit;
+  }
+</style>

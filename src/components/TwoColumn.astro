@@ -1,0 +1,66 @@
+---
+import PortableText from "../components/PortableText.astro";
+
+const { title, leftColumn, rightColumn, backgroundColor, textAlignment } = Astro.props;
+
+// Sanitize function to remove zero-width spaces and similar characters
+const sanitize = (str) => str ? str.replace(/[\u200B-\u200D\uFEFF]/g, '') : '';
+---
+
+<section 
+  class="two-column" 
+  style={`background-color: ${sanitize(backgroundColor)}; text-align: ${sanitize(textAlignment)};`}
+>
+  {title && <h2>{title}</h2>}
+
+  <div class="columns">
+    <div class="column">
+      <PortableText portableText={leftColumn} />
+    </div>
+    <div class="column">
+      <PortableText portableText={rightColumn} />
+    </div>
+  </div>
+</section>
+
+<style>
+
+
+  .two-column {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .column {
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+  }
+
+  .align-left {
+  text-align: left;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.align-right {
+  text-align: right;
+}
+
+/* mobile */
+@media (max-width: 775px) {
+  .columns {
+    display: block;
+  }
+}
+
+</style>

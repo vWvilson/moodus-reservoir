@@ -1,0 +1,28 @@
+---
+const { href, label, variant = "default" } = Astro.props;
+
+const buttonClasses = {
+  default: "bg-gray-800 hover:bg-gray-700 text-white",
+  primary: "bg-blue-500 hover:bg-blue-600 text-white",
+  secondary: "bg-gray-500 hover:bg-gray-600 text-white",
+  outline: "border border-gray-500 text-gray-500 hover:bg-gray-500 hover:text-white",
+};
+---
+<section class="link">
+  <a href={href} class={`px-4 py-2 rounded transition ${buttonClasses[variant]}`}>
+    {label}
+  </a>
+</section>
+
+<style>
+  .link {
+    background: transparent;
+    color:   rgb(55, 55, 55);
+    border-color:   rgb(55, 55, 55);
+  }
+
+  .link:hover {
+    background:   rgb(55, 55, 55);
+    color: var(--earth-deep-forest);
+  }
+</style>

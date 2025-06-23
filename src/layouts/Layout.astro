@@ -42,7 +42,7 @@ import Footer from "../components/Footer.astro"
 }
 :root {
     /* Earth Tone Color Palette */
-    --earth-deep-forest: #2d4a2b;
+    --earth-deep-forest: #2d4a2b; 
     --earth-sage: #87a96b;
     --earth-moss: #6b8e5a;
     --earth-clay: #c67b5c;
@@ -91,6 +91,8 @@ import Footer from "../components/Footer.astro"
     --shadow-large:
       0 20px 25px -5px rgba(45, 74, 43, 0.1),
       0 10px 10px -5px rgba(45, 74, 43, 0.04);
+
+      --swiper-navigation-size: 30px !important;
   }
 
   /* Global Styles */
@@ -98,6 +100,14 @@ import Footer from "../components/Footer.astro"
     box-sizing: border-box;
   }
 
+  h1,h2,h3,h4,h5,h6 {
+    margin: 0;
+    font-weight: 700;
+    color: var(--earth-deep-forest);
+  }
+ p{
+  color:black;
+ }
   body {
 
     line-height: 1.6;
@@ -316,10 +326,10 @@ import Footer from "../components/Footer.astro"
   /* Swiper Navigation */
   .swiper-button-next,
   .swiper-button-prev {
-    background: rgba(45, 74, 43, 0.8);
+    /* background: rgba(45, 74, 43, 0.8); */
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
     margin-top: -25px;
   }
 
@@ -330,13 +340,15 @@ import Footer from "../components/Footer.astro"
   }
 
   .swiper-pagination-bullet {
-    background: var(--earth-deep-forest);
+    background: var(--earth-deep-forest) !important;
+    color:var(--earth-deep-forest);
     opacity: 0.3;
   }
 
   .swiper-pagination-bullet-active {
     opacity: 1;
-    background: var(--earth-sage);
+    background: var(--earth-sage) !important;
+    color: var(--earth-sage);
   }
 
   /* About Section */

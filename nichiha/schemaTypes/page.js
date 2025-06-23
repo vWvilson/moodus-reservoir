@@ -1,27 +1,23 @@
-import { heroComponent } from './heroComponent';
-import { ctaComponent } from './ctaComponent';
-import { headlineComponent } from './headlineComponent';
-import { imageComponent } from './imageComponent';
-import { linkComponent } from './linkComponent';
-import { textComponent } from './textComponent';
-import { blockContent } from './blockContent';
-import { htmlComponent } from './htmlComponent';
-import { tabsComponent } from './tabsComponent';
-import {DocumentIcon} from '@sanity/icons'
+import { DocumentIcon } from '@sanity/icons'
 
 export const page = {
   name: 'page',
   title: 'Page',
   type: 'document',
   icon: DocumentIcon,
-  groups: [{ name: 'seo', title: 'SEO' }, { name: 'page', title: 'Page' },],
+  groups: [
+    { name: 'seo', title: 'SEO' },
+    { name: 'page', title: 'Page' },
+  ],
   fields: [
     {
       title: 'Title',
       name: 'title',
-      type: 'text',
+      type: 'string',
       group: 'page',
+      validation: (Rule) => Rule.required(),
     },
+    
     {
       title: 'Slug',
       name: 'slug',
@@ -34,50 +30,183 @@ export const page = {
       },
     },
     {
-      name: 'components',
-      title: 'Components',
+      name: 'headerImage',
+      title: 'Header Background Image (optional)',
+      type: 'image',
       group: 'page',
-      type: 'array',
-      of: [
-        { name: 'heroComponent', type: 'reference', to: [{ type: 'heroComponent' }] },
-        { name: 'ctaComponent', type: 'reference', to: [{ type: 'ctaComponent' }] },
-        { name: 'headlineComponent', type: 'reference', to: [{ type: 'headlineComponent' }] },
-        { name: 'imageComponent', type: 'reference', to: [{ type: 'imageComponent' }] },
-        { name: 'linkComponent', type: 'reference', to: [{ type: 'linkComponent' }] },
-        { name: 'textComponent', type: 'reference', to: [{ type: 'textComponent' }] },
-        { name: "htmlComponent", type: "reference", to: [{ type: "htmlComponent" }] },
-        { name: 'tabsComponent', type: 'reference', to: [{ type: 'tabsComponent' }] },
-        { name: 'calloutCardComponent', type: 'reference', to: [{ type: 'calloutCardComponent' }] },
-
-     
+      description: 'Background image for the page header. If not provided, a solid color background will be used.',
+      options: {
+        hotspot: true,
+      },
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          title: 'Alt text',
+          description: 'Describe the image for accessibility',
+        },
       ],
     },
     {
-      title: 'Content',  
-      name: 'blockContent',
-      group: 'page',
+      name: 'content',
+      title: 'Page Content',
       type: 'array',
-      of: blockContent.of, 
+      group: 'page',
+      of: [
+        // Simple text block
+        {
+          type: 'block',
+          title: 'Text',
+          styles: [
+            { title: 'Normal', value: 'normal' },
+            { title: 'Heading 1', value: 'h1' },
+            { title: 'Heading 2', value: 'h2' },
+            { title: 'Heading 3', value: 'h3' },
+          ],
+          marks: {
+            decorators: [
+              { title: 'Bold', value: 'strong' },
+              { title: 'Italic', value: 'em' },
+            ],
+            annotations: [
+              {
+                title: 'Link',
+                name: 'link',
+                type: 'object',
+                fields: [
+                  {
+                    title: 'URL',
+                    name: 'href',
+                    type: 'url',
+                  },
+                ],
+              },
+            ],
+          },
+        },
+        // Simple image
+        {
+          type: 'image',
+          title: 'Image',
+          options: {
+            hotspot: true,
+          },
+          fields: [
+            {
+              name: 'alt',
+              type: 'string',
+              title: 'Alt text',
+              description: 'Important for accessibility and SEO',
+            },
+            {
+              name: 'caption',
+              type: 'string',
+              title: 'Caption (optional)',
+            },
+          ],
+        },
+        // Call-to-action button
+        {
+          type: 'object',
+          name: 'button',
+          title: 'Button',
+          fields: [
+            {
+              name: 'text',
+              type: 'string',
+              title: 'Button Text',
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              name: 'url',
+              type: 'url',
+              title: 'Button Link',
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              name: 'style',
+              type: 'string',
+              title: 'Button Style',
+              options: {
+                list: [
+                  { title: 'Primary', value: 'primary' },
+                  { title: 'Secondary', value: 'secondary' },
+                  { title: 'Outline', value: 'outline' },
+                ],
+              },
+              initialValue: 'primary',
+            },
+          ],
+          preview: {
+            select: {
+              title: 'text',
+              subtitle: 'url',
+            },
+          },
+        },
+        // Callout/highlight box
+        {
+          type: 'object',
+          name: 'callout',
+          title: 'Callout Box',
+          fields: [
+            {
+              name: 'title',
+              type: 'string',
+              title: 'Title (optional)',
+            },
+            {
+              name: 'text',
+              type: 'text',
+              title: 'Text',
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              name: 'type',
+              type: 'string',
+              title: 'Type',
+              options: {
+                list: [
+                  { title: 'Info', value: 'info' },
+                  { title: 'Success', value: 'success' },
+                  { title: 'Warning', value: 'warning' },
+                  { title: 'Highlight', value: 'highlight' },
+                ],
+              },
+              initialValue: 'info',
+            },
+          ],
+          preview: {
+            select: {
+              title: 'title',
+              subtitle: 'text',
+            },
+            prepare({ title, subtitle }) {
+              return {
+                title: title || 'Callout',
+                subtitle: subtitle?.substring(0, 50) + '...',
+              }
+            },
+          },
+        },
+      ],
     },
     {
       name: 'seo',
       title: 'SEO',
       type: 'seoPanel',
       group: 'seo',
-    }
+    },
   ],
-  preview: { 
+  preview: {
     select: {
       title: 'title',
-
     },
     prepare(selection) {
-      const { title} = selection;
+      const { title } = selection
       return {
         title,
-      
-      };
+      }
     },
   },
-
-};
+}

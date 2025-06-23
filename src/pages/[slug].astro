@@ -1,13 +1,6 @@
 ---
 import { loadQuery } from "../../nichiha/lib/load-query";
 import Layout from '../layouts/Layout.astro';
-import HeroComponent from "../components/Hero.astro";
-import CtaComponent from "../components/Cta.astro";
-import HeadlineComponent from "../components/Headline.astro";
-import ImageComponent from "../components/Image.astro";
-import LinkComponent from "../components/Link.astro";
-import TextComponent  from '../components/Text.astro';
-import HtmlComponent from "../components/HtmlComponent.astro";
 import PortableText from "../components/PortableText.astro";  
 import SeoComponent from "../components/SeoComponent.astro";
 
@@ -27,38 +20,60 @@ const { slug } = Astro.params;
 const { data: page } = await loadQuery({
   query: `*[_type == "page" && slug.current == $slug][0]{
     title,
+    headerImage {
+      asset->{
+        url
+      },
+      alt
+    },
     seo {
       seoTitle,
       seoDescription,
       seoKeywords,
       image
     },
-    components[]->{
-      _type,
-      ...
-    },
-    blockContent
+    content
   }`,
   params: { slug },
 });
 
-const componentMap = {
-  heroComponent: HeroComponent,
-  ctaComponent: CtaComponent,
-  headlineComponent: HeadlineComponent,
-  imageComponent: ImageComponent,
-  linkComponent: LinkComponent,
-  textComponent: TextComponent,
-  htmlComponent: HtmlComponent,
-};
+// Helper function to render content blocks
+function renderContentBlock(block) {
+  switch (block._type) {
+    case 'block':
+      // This is handled by PortableText component
+      return { type: 'portableText', content: [block] };
+    
+    case 'image':
+      return { 
+        type: 'image', 
+        src: block.asset?.url,
+        alt: block.alt || '',
+        caption: block.caption
+      };
+    
+    case 'button':
+      return {
+        type: 'button',
+        text: block.text,
+        url: block.url,
+        style: block.style || 'primary'
+      };
+    
+    case 'callout':
+      return {
+        type: 'callout',
+        title: block.title,
+        text: block.text,
+        calloutType: block.type || 'info'
+      };
+    
+    default:
+      return null;
+  }
+}
 
-// Separate hero components from other components
-const heroComponents = page.components?.filter(comp => comp._type === 'heroComponent') || [];
-const linkComponents = page.components?.filter(comp => comp._type === 'linkComponent') || [];
-const otherComponents = page.components?.filter(
-  comp => comp._type !== 'heroComponent' && comp._type !== 'linkComponent'
-) || [];
-
+const renderedContent = page.content?.map(renderContentBlock).filter(Boolean) || [];
 ---
 
 <Layout>
@@ -69,64 +84,66 @@ const otherComponents = page.components?.filter(
     image={page.seo?.image || '/default-image.jpg'}
   />
   
-  <!-- Hero Section - Always at top -->
-  <section class="page-hero">
-    {heroComponents.length > 0 ? (
-      heroComponents.map((heroComponent) => {
-        const Component = componentMap[heroComponent._type];
-        return Component ? <Component {...heroComponent} /> : null;
-      })
-    ) : (
-
-      <div class="fallback-hero">
-        <div class="hero-content">
-          <h1 class="hero-title">{page.title}</h1>
-        </div>
-        <div class="hero-overlay"></div>
-      </div>
-    )}
-  </section>
+  <!-- Page Header -->
+  <header class="page-header" style={page.headerImage?.asset?.url ? `background-image: url(${page.headerImage.asset.url})` : ''}>
+    <div class="header-overlay"></div>
+    <div class="container">
+      <h1 class="page-title">{page.title}</h1>
+    </div>
+  </header>
 
   <!-- Main Content -->
   <main class="main-content">
-    <div class="content-container">
-      
-
-      
-
-      <!-- Portable Text Content -->
-      {page.blockContent && (
-        <section class="portable-text-section">
-          <div class="prose-container">
-            <PortableText portableText={page.blockContent} />
-          </div>
-        </section>
-      )}
-
-
-<!-- link component -->
-{linkComponents.map((linkComponent) => {
-  const Component = componentMap[linkComponent._type];
-
-  // Remap fields for LinkComponent specifically
-  const props = {
-    ...linkComponent,
-    href: linkComponent.url,
-    label: linkComponent.title,
-  };
-
-  return Component ? <Component {...props} /> : null;
-})}
-
-      <!-- Other Components -->
-      {otherComponents.map((component) => {
-        const Component = componentMap[component._type];
-        return Component ? <Component {...component} /> : null;
+    <div class="container">
+      {renderedContent.map((item, index) => {
+        if (item.type === 'portableText') {
+          return (
+            <div class="prose-section" >
+              <PortableText portableText={item.content} />
+            </div>
+          );
+        }
+        
+        if (item.type === 'image') {
+          return (
+            <figure class="image-section" >
+              <img 
+                src={item.src} 
+                alt={item.alt}
+                class="responsive-image"
+              />
+              {item.caption && (
+                <figcaption class="image-caption">{item.caption}</figcaption>
+              )}
+            </figure>
+          );
+        }
+        
+        if (item.type === 'button') {
+          return (
+            <div class="button-section" >
+              <a 
+                href={item.url} 
+                class={`btn btn-${item.style}`}
+              >
+                {item.text}
+              </a>
+            </div>
+          );
+        }
+        
+        if (item.type === 'callout') {
+          return (
+            <div class={`callout callout-${item.calloutType}`} >
+              {item.title && <h3 class="callout-title">{item.title}</h3>}
+              <p class="callout-text">{item.text}</p>
+            </div>
+          );
+        }
+        
+        return null;
       })}
-      
     </div>
   </main>
-  <style >
-
-  </style>
 </Layout>
+

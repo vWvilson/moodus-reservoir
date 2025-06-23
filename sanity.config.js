@@ -5,7 +5,7 @@ import {deskStructure} from './nichiha/schemaTypes/deskStructure';
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './nichiha/schemaTypes/'
 import { presentationTool } from "sanity/presentation";
-import { resolve } from "./nichiha/lib/resolve";
+// import { resolve } from "./nichiha/lib/resolve";
 
 export default defineConfig({
   name: 'default',
@@ -15,7 +15,7 @@ export default defineConfig({
   dataset: 'production',
 
   plugins: [    deskTool({ structure: deskStructure }), visionTool(),  presentationTool({
-    resolve,
+
     previewUrl: location.origin,
   }),],
   studioBasePath: '/admin',

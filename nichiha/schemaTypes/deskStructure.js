@@ -37,16 +37,9 @@ export const deskStructure = (S) =>
             ])
         ),
 
-      // blogs
-      S.listItem()
-        .title('Blog')
-        .icon(DocumentsIcon)
-        .child(
-          S.documentTypeList('blog').title('Blog Posts')
-        ),
 
 
       ...S.documentTypeListItems().filter(
-        (listItem) => !['page', 'heroComponent','calloutCardComponent', 'ctaComponent','twoColumnCta', 'headlineComponent', 'imageComponent', 'linkComponent', 'textComponent', 'htmlComponent', 'blog','tabsComponent'].includes(listItem.getId())
+        (listItem) => !['page', 'heroComponent','calloutCardComponent', 'ctaComponent','twoColumnCta', 'headlineComponent', 'imageComponent', 'linkComponent', 'textComponent', 'htmlComponent', 'tabsComponent'].includes(listItem.getId())
       ),
     ]);

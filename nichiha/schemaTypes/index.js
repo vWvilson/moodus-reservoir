@@ -1,6 +1,6 @@
 // schema.js
-import { blog } from './blog';
-import { product } from './products';
+
+
 import { blockContent } from './blockContent';
 import { heroComponent } from './heroComponent';
 import { ctaComponent } from './ctaComponent';
@@ -20,9 +20,9 @@ import {seoSchema} from './seo';
 
 export const schemaTypes = [
   seoSchema,
-  blog,
+
   blockContent,
-  product,
+
   page,
   heroComponent,
   ctaComponent,

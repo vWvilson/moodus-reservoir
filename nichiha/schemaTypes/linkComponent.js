@@ -5,7 +5,6 @@ export const linkComponent = {
   title: 'Link Components',
   type: 'document',
   icon: LinkIcon,
-  groups: [{ name: 'components', title: 'Components' }],
   fields: [
     
     {

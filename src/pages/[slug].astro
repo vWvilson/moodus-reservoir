@@ -1,14 +1,14 @@
 ---
 import { loadQuery } from "../../nichiha/lib/load-query";
-import Layout from '../layouts/Layout.astro';
-import PortableText from "../components/PortableText.astro";  
+import Layout from "../layouts/Layout.astro";
+import PortableText from "../components/PortableText.astro";
 import SeoComponent from "../components/SeoComponent.astro";
 
 export const prerender = true;
 
 export async function getStaticPaths() {
   const { data: pages } = await loadQuery({
-    query: `*[_type == "page"]`
+    query: `*[_type == "page"]`,
   });
 
   return pages.map(({ slug }) => ({
@@ -37,113 +37,177 @@ const { data: page } = await loadQuery({
   params: { slug },
 });
 
+// Debug: Let's see what's in the button block
+console.log("Page content:", page.content);
+
 // Helper function to render content blocks
 function renderContentBlock(block) {
+
+
+  // Define allowed styles inside the function
+  const allowedStyles = {
+    primary: "btn-primary",
+    secondary: "btn-secondary",
+    outline: "btn-outline",
+  };
+
   switch (block._type) {
-    case 'block':
-      // This is handled by PortableText component
-      return { type: 'portableText', content: [block] };
-    
-    case 'image':
-      return { 
-        type: 'image', 
-        src: block.asset?.url,
-        alt: block.alt || '',
-        caption: block.caption
-      };
-    
-    case 'button':
+    case "block":
+      return { type: "portableText", content: [block] };
+
+    case "image":
       return {
-        type: 'button',
+        type: "image",
+        src: block.asset?.url,
+        alt: block.alt || "",
+        caption: block.caption,
+      };
+
+    case "button":
+      console.log("Button block style:", block.style);
+      const mappedStyle = allowedStyles[block.style] || "btn-secondary";
+      console.log("Mapped style:", mappedStyle);
+      return {
+        type: "button",
         text: block.text,
         url: block.url,
-        style: block.style || 'primary'
+        style: mappedStyle,
       };
-    
-    case 'callout':
+
+      case "youtube":
+  try {
+    const url = new URL(block.url);
+    const videoId = url.searchParams.get("v") || url.pathname.split("/").pop();
+    return {
+      type: "youtube",
+      videoId,
+      title: block.title || "Embedded YouTube video",
+    };
+  } catch (e) {
+    console.warn("Invalid YouTube URL", block.url);
+    return null;
+  }
+
+    case "callout":
       return {
-        type: 'callout',
+        type: "callout",
         title: block.title,
         text: block.text,
-        calloutType: block.type || 'info'
+        calloutType: block.type || "info",
       };
-    
+
     default:
       return null;
   }
 }
 
-const renderedContent = page.content?.map(renderContentBlock).filter(Boolean) || [];
+const renderedContent =
+  page.content?.map(renderContentBlock).filter(Boolean) || [];
 ---
 
 <Layout>
-  <SeoComponent 
+  <SeoComponent
     title={page.seo?.seoTitle || page.title}
-    description={page.seo?.seoDescription || 'Default description.'}
-    keywords={page.seo?.seoKeywords?.join(', ') || ''}
-    image={page.seo?.image || '/default-image.jpg'}
+    description={page.seo?.seoDescription || "Default description."}
+    keywords={page.seo?.seoKeywords?.join(", ") || ""}
+    image={page.seo?.image || "/default-image.jpg"}
   />
-  
+
   <!-- Page Header -->
-  <header class="page-header" style={page.headerImage?.asset?.url ? `background-image: url(${page.headerImage.asset.url})` : ''}>
+  <header
+    class="page-header"
+    style={page.headerImage?.asset?.url
+      ? `background-image: url(${page.headerImage.asset.url})`
+      : ""}
+  >
     <div class="header-overlay"></div>
     <div class="container">
-      <h1 class="page-title">{page.title}</h1>
+      <h1>{page.title}</h1>
     </div>
   </header>
 
   <!-- Main Content -->
   <main class="main-content">
     <div class="container">
-      {renderedContent.map((item, index) => {
-        if (item.type === 'portableText') {
-          return (
-            <div class="prose-section" >
-              <PortableText portableText={item.content} />
-            </div>
-          );
-        }
-        
-        if (item.type === 'image') {
-          return (
-            <figure class="image-section" >
-              <img 
-                src={item.src} 
-                alt={item.alt}
-                class="responsive-image"
-              />
-              {item.caption && (
-                <figcaption class="image-caption">{item.caption}</figcaption>
-              )}
-            </figure>
-          );
-        }
-        
-        if (item.type === 'button') {
-          return (
-            <div class="button-section" >
-              <a 
-                href={item.url} 
-                class={`btn btn-${item.style}`}
-              >
-                {item.text}
-              </a>
-            </div>
-          );
-        }
-        
-        if (item.type === 'callout') {
-          return (
-            <div class={`callout callout-${item.calloutType}`} >
-              {item.title && <h3 class="callout-title">{item.title}</h3>}
-              <p class="callout-text">{item.text}</p>
-            </div>
-          );
-        }
-        
-        return null;
-      })}
+      {
+        renderedContent.map((item, index) => {
+          if (item.type === "portableText") {
+            return (
+              <div class="prose-section">
+                <PortableText portableText={item.content} />
+              </div>
+            );
+          }
+
+          if (item.type === "image") {
+            return (
+              <figure class="image-section">
+                <img src={item.src} alt={item.alt} class="responsive-image" />
+                {item.caption && (
+                  <figcaption class="image-caption">{item.caption}</figcaption>
+                )}
+              </figure>
+            );
+          }
+
+          if (item.type === "button") {
+            return (
+              <div class="button-section">
+                <a href={item.url} class={`btn ${item.style}`}>
+                  {item.text}
+                </a>
+              </div>
+            );
+          }
+
+          if (item.type === "callout") {
+            return (
+              <div class={`callout callout-${item.calloutType}`}>
+                {item.title && <h3 class="callout-title">{item.title}</h3>}
+                <p class="callout-text">{item.text}</p>
+              </div>
+            );
+          }
+          if (item.type === "youtube") {
+            return (
+              <div class="youtube-embed">
+                <iframe
+                  width="100%"
+                  height="400"
+                  src={`https://www.youtube.com/embed/${item.videoId}`}
+                  title={item.title}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            );
+          }
+
+          return null;
+        })
+      }
     </div>
   </main>
-</Layout>
 
+  <style>
+    .main-content {
+      margin: 60px auto;
+    }
+    .youtube-embed {
+  margin: 2rem 0;
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+}
+
+.youtube-embed iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+  </style>
+</Layout>

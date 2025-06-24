@@ -12,14 +12,11 @@ const { data: navigation } = await loadQuery({
         internalLink->{
           slug
         },
-        subItems[]->{
-          title,
-          items[]{
-            label,
-            url,
-            internalLink->{
-              slug
-            }
+        subItems[]{
+          label,
+          url,
+          internalLink->{
+            slug
           }
         }
       }
@@ -57,7 +54,6 @@ const { data: navigation } = await loadQuery({
           class="logo"
           alt="MRPG Logo"
         />
- 
       </a>
     </div>
 
@@ -77,40 +73,44 @@ const { data: navigation } = await loadQuery({
     <div class="main-menu-wrapper">
       <ul class="main-menu" :class="isOpen ? 'show' : 'hide'">
         {
-          navigation?.[0]?.items?.map((item) => (
-            <li class="nav-item">
-              <a
-                href={
-                  item.internalLink?.slug
-                    ? `/${item.internalLink.slug.current}`
-                    : item.url
-                }
-                class="nav-link"
-                :class="currentPath === `${item.internalLink?.slug ? `/${item.internalLink.slug.current}` : item.url}` ? 'active' : ''"
-              >
-                {item.label}
-              </a>
+          navigation?.[0]?.items?.map((item) => {
+            const itemUrl = item.internalLink?.slug?.current 
+              ? `/${item.internalLink.slug.current}` 
+              : item.url;
+            
+            return (
+              <li class="nav-item">
+                <a
+                  href={itemUrl}
+                  class="nav-link"
+                  :class={`currentPath === '${itemUrl}' ? 'active' : ''`}
+                >
+                  {item.label}
+                </a>
 
-              {item.subItems && (
-                <ul class="sub-menu">
-                  {item.subItems.map((subItem) => (
-                    <li class="sub-item">
-                      <a
-                        href={
-                          subItem.internalLink?.slug
-                            ? `/${subItem.internalLink.slug.current}`
-                            : subItem.url
-                        }
-                        class="sub-link"
-                      >
-                        {subItem.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </li>
-          ))
+                {item.subItems && item.subItems.length > 0 && (
+                  <ul class="sub-menu">
+                    {item.subItems.map((subItem) => {
+                      const subItemUrl = subItem.internalLink?.slug?.current
+                        ? `/${subItem.internalLink.slug.current}`
+                        : subItem.url;
+                      
+                      return (
+                        <li class="sub-item">
+                          <a
+                            href={subItemUrl}
+                            class="sub-link"
+                          >
+                            {subItem.label}
+                          </a>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                )}
+              </li>
+            );
+          })
         }
         
         <!-- Mobile Contact Button -->
@@ -245,50 +245,32 @@ const { data: navigation } = await loadQuery({
   }
 
   .nav-link {
+    display: inline-block;
     position: relative;
-color: rgb(55, 55, 55);;
+    color: rgb(55, 55, 55);
     text-transform: uppercase;
     letter-spacing: 0.05em;
     text-decoration: none;
     padding: var(--spacing-sm) var(--spacing-md);
-    border-radius: 6px;
     font-weight: 500;
     font-size: var(--font-size-sm);
-    transition: all 0.3s ease;
     white-space: nowrap;
   }
 
-  .nav-link:hover {
-  
-    color: var(--earth-deep-forest);
-    transform: translateY(-1px);
-  }
+
 
   .nav-link.active {
-    background: var(--earth-sage);
-    color: white;
-    box-shadow: var(--shadow-soft);
+    color:var(--earth-sage)
+
   }
 
-  .nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background: var(--earth-sage);
-    transition: all 0.3s ease;
-    transform: translateX(-50%);
+
+
+  .nav-link:hover {
+    color:var(--earth-sage)
   }
 
-  .nav-link:hover::after {
-    width: 80%;
-  }
 
-  .nav-link.active::after {
-    width: 0;
-  }
 
   /* Dropdown Styles */
   .sub-menu {
@@ -455,6 +437,8 @@ color: rgb(55, 55, 55);;
       opacity: 1;
       visibility: visible;
       transform: none;
+      min-width: auto;
+      width: 100%;
     }
 
     .sub-link {
@@ -491,8 +475,6 @@ color: rgb(55, 55, 55);;
     .logo {
       max-width: 50px;
     }
-
-  
 
     nav.scrolled .logo {
       max-width: 40px;

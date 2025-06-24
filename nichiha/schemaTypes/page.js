@@ -17,7 +17,7 @@ export const page = {
       group: 'page',
       validation: (Rule) => Rule.required(),
     },
-    
+
     {
       title: 'Slug',
       name: 'slug',
@@ -185,6 +185,41 @@ export const page = {
               return {
                 title: title || 'Callout',
                 subtitle: subtitle?.substring(0, 50) + '...',
+              }
+            },
+          },
+        },
+        // YouTube Embed
+        {
+          type: 'object',
+          name: 'youtube',
+          title: 'YouTube Embed',
+          fields: [
+            {
+              name: 'url',
+              type: 'url',
+              title: 'YouTube URL',
+              validation: (Rule) => Rule.required().uri({
+                scheme: ['http', 'https'],
+                allowRelative: false,
+                message: 'Must be a valid YouTube URL',
+              }),
+            },
+            {
+              name: 'title',
+              type: 'string',
+              title: 'Video Title (optional)',
+            },
+          ],
+          preview: {
+            select: {
+              title: 'title',
+              url: 'url',
+            },
+            prepare({ title, url }) {
+              return {
+                title: title || 'YouTube Video',
+                subtitle: url ? url : 'No URL provided',
               }
             },
           },

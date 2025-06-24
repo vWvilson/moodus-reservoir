@@ -16,25 +16,15 @@ import { imageGallery } from './imageGallery';
 import { htmlComponent } from './htmlComponent';
 import { navigation } from './navigation';
 import { tabsComponent } from './tabsComponent';
+import { event } from './event';
 import {seoSchema} from './seo';
 
 export const schemaTypes = [
   seoSchema,
-
+  event,
   blockContent,
-
   page,
-  heroComponent,
-  ctaComponent,
-  calloutCardComponent,
-  twoColumnCta,
-  headlineComponent,
-  imageComponent,
   linkComponent,
-  textComponent,
-  twoColumn,
-  imageGallery,
-  htmlComponent,
   navigation,
-  tabsComponent,
+
 ];

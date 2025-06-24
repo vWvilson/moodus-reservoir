@@ -3,8 +3,8 @@
 
 // const visualEditingEnabled =
 //   import.meta.env.PUBLIC_SANITY_VISUAL_EDITING_ENABLED == "true";
-import Main from "../components/menus/Main.astro"
-import Footer from "../components/Footer.astro"
+import Main from "../components/menus/Main.astro";
+import Footer from "../components/Footer.astro";
 ---
 
 <!doctype html>
@@ -13,42 +13,35 @@ import Footer from "../components/Footer.astro"
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-        <meta name="generator" content={Astro.generator} />
-
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="generator" content={Astro.generator} />
   </head>
   <body>
     <div class="layout-container">
-    <Main />
-    <slot />
-    <!-- <VisualEditing enabled={visualEditingEnabled} zIndex={1000} /> -->
-    <Footer />
-  </div>
+      <Main />
+      <slot />
+      <!-- <VisualEditing enabled={visualEditingEnabled} zIndex={1000} /> -->
+      <Footer />
+    </div>
   </body>
 </html>
 
 <style is:global>
 
-
-
-* {
-
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: "Jost", sans-serif;
-}
-:root {
+  :root {
     /* Earth Tone Color Palette */
-    --earth-deep-forest: #2d4a2b; 
+    --earth-deep-forest: #2d4a2b;
     --earth-sage: #87a96b;
     --earth-moss: #6b8e5a;
     --earth-clay: #c67b5c;
     --earth-sand: #e8d5b7;
     --earth-stone: #8b7d6b;
-    --earth-bark:  rgb(55, 55, 55);
+    --earth-bark: rgb(55, 55, 55);
     --earth-sky: #a8c8ec;
     --earth-mist: #f2f2f2;
 
@@ -79,7 +72,7 @@ import Footer from "../components/Footer.astro"
     --font-size-xl: 1.25rem;
     --font-size-2xl: 1.5rem;
     --font-size-3xl: 2rem;
-    --font-size-4xl: 2.5rem;
+    --font-size-4xl: 3rem;
 
     /* Shadows */
     --shadow-soft:
@@ -92,33 +85,52 @@ import Footer from "../components/Footer.astro"
       0 20px 25px -5px rgba(45, 74, 43, 0.1),
       0 10px 10px -5px rgba(45, 74, 43, 0.04);
 
-      --swiper-navigation-size: 30px !important;
+    --swiper-navigation-size: 30px !important;
   }
 
   /* Global Styles */
   * {
     box-sizing: border-box;
+    font-family: "Jost", sans-serif;
   }
 
-  h1,h2,h3,h4,h5,h6 {
-    margin: 0;
-    font-weight: 700;
+  h1 {
+    font-size: var(--font-size-4xl);
+  }
+
+  h2 {
+    font-size: var(--font-size-3xl);
+    margin:30px auto 15px auto;
+  }
+
+  h3 {
+    font-size: var(--font-size-2xl);
+  }
+
+  h4 {
+    font-size: var(--font-size-xl);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     color: var(--earth-deep-forest);
   }
- p{
-  color:black;
- }
+  p {
+    color: black;
+  }
   body {
-
     line-height: 1.6;
     color: rgb(55, 55, 55);
-
     margin: 0;
     padding: 0;
   }
-.layout-container {
- position: relative;
-   top:130px
+  .layout-container {
+    position: relative;
+    top: 130px;
   }
   /* Hero Section */
   .hero-section {
@@ -133,13 +145,14 @@ import Footer from "../components/Footer.astro"
   }
 
   .hero-section::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M30 30c0-11.046-8.954-20-20-20s-20 8.954-20 20 8.954 20 20 20 20-8.954 20-20zm0 0c0 11.046 8.954 20 20 20s20-8.954 20-20-8.954-20-20-20-20 8.954-20 20z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M30 30c0-11.046-8.954-20-20-20s-20 8.954-20 20 8.954 20 20 20 20-8.954 20-20zm0 0c0 11.046 8.954 20 20 20s20-8.954 20-20-8.954-20-20-20-20 8.954-20 20z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")
+      repeat;
     pointer-events: none;
   }
 
@@ -254,9 +267,12 @@ import Footer from "../components/Footer.astro"
     background: white;
   }
 
+  .home-section-title {
+    color: var(--earth-deep-forest);
+    margin: 0 0 var(--spacing-md) 0;
+    text-align: center;
+  }
   .section-title {
-    font-size: var(--font-size-3xl);
-    font-weight: 700;
     text-align: center;
     color: var(--earth-deep-forest);
     margin: 0 0 var(--spacing-sm) 0;
@@ -326,10 +342,8 @@ import Footer from "../components/Footer.astro"
   /* Swiper Navigation */
   .swiper-button-next,
   .swiper-button-prev {
-    /* background: rgba(45, 74, 43, 0.8); */
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     margin-top: -25px;
   }
 
@@ -340,15 +354,15 @@ import Footer from "../components/Footer.astro"
   }
 
   .swiper-pagination-bullet {
-    background: var(--earth-deep-forest) !important;
-    color:var(--earth-deep-forest);
+    background: white !important;
+    color: white !important;
     opacity: 0.3;
   }
 
   .swiper-pagination-bullet-active {
     opacity: 1;
-    background: var(--earth-sage) !important;
-    color: var(--earth-sage);
+    background: white !important;
+    color: white;
   }
 
   /* About Section */
@@ -363,7 +377,6 @@ import Footer from "../components/Footer.astro"
     grid-template-columns: 1fr 1fr;
     gap: var(--spacing-2xl);
     align-items: center;
-  
   }
 
   .two-column-grid .section-title {
@@ -472,7 +485,7 @@ import Footer from "../components/Footer.astro"
     border: 2px solid transparent;
   }
 
-  .btn-primary {
+  .btn-primary{
     background: var(--earth-clay);
     color: white;
   }
@@ -557,7 +570,7 @@ import Footer from "../components/Footer.astro"
       font-size: var(--font-size-2xl);
     }
   }
-  .link a{
+  .link a {
     color: var(--earth-sage);
     text-decoration: none;
     transition: color 0.3s ease;

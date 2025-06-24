@@ -1,0 +1,99 @@
+---
+import { loadQuery } from "../../nichiha/lib/load-query";
+import Layout from "../layouts/Layout.astro";
+
+const query = `*[_type == "event"] {
+  title,
+  slug,
+  date,
+  location,
+}`;
+
+const { data: events } = await loadQuery({ query });
+
+// Group events by date
+const eventsByDate = {};
+for (const event of events) {
+  const date = new Date(event.date).toISOString().split("T")[0];
+  if (!eventsByDate[date]) eventsByDate[date] = [];
+  eventsByDate[date].push(event);
+}
+
+// Get current month & year
+const now = new Date();
+const year = now.getFullYear();
+const month = now.getMonth();
+const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+const firstDay = new Date(year, month, 1).getDay(); // 0 (Sun) - 6 (Sat)
+---
+
+<Layout>
+  <main class="main-content">
+    <h1>
+      Events Calendar — {now.toLocaleString("default", { month: "long" })}
+      {year}
+    </h1>
+
+    <!-- Day names -->
+    <div class="calendar">
+      <div class="day-name">Sun</div>
+      <div class="day-name">Mon</div>
+      <div class="day-name">Tue</div>
+      <div class="day-name">Wed</div>
+      <div class="day-name">Thu</div>
+      <div class="day-name">Fri</div>
+      <div class="day-name">Sat</div>
+
+      <!-- Empty cells before 1st of month -->
+      {Array.from({ length: firstDay }).map(() => <div class="day" />)}
+
+      <!-- Days of the month -->
+      {
+        Array.from({ length: daysInMonth }).map((_, i) => {
+          const day = i + 1;
+          const dateStr = `${year}-${(month + 1).toString().padStart(2, "0")}-${day
+            .toString()
+            .padStart(2, "0")}`;
+          const dayEvents = eventsByDate[dateStr] || [];
+          return (
+            <div class="day">
+              <strong>{day}</strong>
+              {dayEvents.map((e) => (
+                <div class="event">
+      <a href={`/events/${e.slug.current}`}>
+  {e.title}
+</a>
+
+                </div>
+              ))}
+            </div>
+          );
+        })
+      }
+    </div>
+  </main>
+  <style>
+    .calendar {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+    }
+    .day {
+      border: 1px solid #ccc;
+      padding: 8px;
+      min-height: 100px;
+    }
+    .event {
+      font-size: 0.9rem;
+      background: #def;
+      margin: 4px 0;
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+    .day-name {
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</Layout>

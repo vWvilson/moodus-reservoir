@@ -1,0 +1,230 @@
+---
+import { loadQuery } from "../../nichiha/lib/load-query";
+import Layout from "../layouts/Layout.astro";
+
+import mr1 from "../assets/mr-1.jpeg";
+import mr2 from "../assets/mr-2.jpeg";
+import mr3 from "../assets/mr-3.jpeg";
+import mr4 from "../assets/mr-4.jpeg";
+import mr5 from "../assets/mr-5.jpeg";
+import mr6 from "../assets/mr-6.jpeg";
+import mr8 from "../assets/mr-8.jpeg";
+
+import heron from "../assets/heron.jpg";
+
+import harvester from "../assets/ecoharvester.jpg";
+---
+
+<Layout>
+  <!-- Hero Section -->
+  <!-- <section class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">Moodus Reservoir Preservation Group</h1>
+      <p class="hero-subtitle">Protecting a 500-acre treasure in the heart of East Haddam, CT</p>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-number">500</span>
+          <span class="stat-label">Acres Protected</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">2010</span>
+          <span class="stat-label">Since</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">1</span>
+          <span class="stat-label">Community</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-overlay"></div>
+  </section> -->
+
+  <!-- Image Carousel Section -->
+  <section class="carousel-section">
+    <h1 class="home-section-title">The Moodus Reservoir Preservation Group</h2>
+    <p class="section-subtitle">
+      Experience the natural beauty we're working to preserve
+    </p>
+
+    <div class="swiper-container" id="reservoirSwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="slide-content">
+            <img src={mr1.src} alt="Serene lake view at sunset" />
+            <div class="slide-caption"></div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="slide-content">
+            <img src={mr2.src} alt="Morning mist over the reservoir" />
+            <div class="slide-caption"></div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="slide-content">
+            <img src={mr6.src} alt="Wildlife around the reservoir" />
+            <div class="slide-caption"></div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="slide-content">
+            <img src={mr4.src} alt="Forest surrounding the reservoir" />
+            <div class="slide-caption"></div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="slide-content">
+            <img src={mr5.src} alt="Conservation work in progress" />
+            <div class="slide-caption"></div>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="two-column-section">
+    <div class="container">
+      <div class="two-column-grid">
+        <div class="two-column-text">
+          <h2 class="section-title">Our Mission</h2>
+          <p>
+            The Moodus Reservoir Preservation Group (MRPG) is a non-profit
+            organization dedicated to the environmental well-being, quality,
+            health, and enjoyment of Moodus Reservoir, a 500-acre lake central
+            to East Haddam, CT. Since 2010, we've been working with local and
+            state agencies to address threats like invasive aquatic plants,
+            raise public awareness through education, and implement programs
+            that protect and improve the Reservoir's ecosystem. We also actively
+            promote volunteerism to further our mission.
+          </p>
+        </div>
+        <div class="two-column-image">
+          <img src={heron.src} alt="Volunteers working on conservation" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Initiatives Section -->
+  <section class="initiatives-section">
+    <div class="container">
+      <h2 class="section-title">Key Initiatives</h2>
+      <div class="initiatives-grid">
+        <div class="initiative-card">
+          <div class="initiative-icon">🌱</div>
+          <h3>Invasive Species Control</h3>
+          <p>
+            Ongoing monitoring and removal of invasive aquatic plants that
+            threaten the reservoir's ecosystem balance.
+          </p>
+        </div>
+        <div class="initiative-card">
+          <div class="initiative-icon">🔬</div>
+          <h3>Water Quality Testing</h3>
+          <p>
+            Regular water quality assessments to ensure the health of aquatic
+            life and surrounding environment.
+          </p>
+        </div>
+        <!-- <div class="initiative-card">
+          <div class="initiative-icon">👥</div>
+          <h3>Community Education</h3>
+          <p>
+            Raising awareness through workshops, events, and educational
+            programs for local residents.
+          </p>
+        </div> -->
+        <div class="initiative-card">
+          <div class="initiative-icon">🤝</div>
+          <h3>Agency Collaboration</h3>
+          <p>
+            Working closely with local and state agencies to implement effective
+            conservation strategies.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- volunteer section -->
+  <section class="two-column-section">
+    <div class="container">
+      <div class="two-column-grid">
+        <div class="two-column-image">
+          <img src={harvester.src} alt="Volunteers working on conservation" />
+        </div>
+
+        <div class="two-column-text">
+          <h2 class="section-title">
+            Volunteers Needed:<br> Join Our Weed Harvesting Team!
+          </h2>
+          <p>
+            The future health of Moodus Reservoir depends on community support,
+            and we have an urgent need for volunteers to assist with our
+            weed harvesting program. This essential work directly impacts the
+            water quality and recreational enjoyment of our beautiful lake by
+            combating invasive species.
+          </p>
+          <p><a href="/contact" class="btn btn-secondary">Volunteer</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+
+
+<!-- Swiper.js CSS and JS -->
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.7/swiper-bundle.min.css"
+/>
+<script
+  type="module"
+  src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.7/swiper-bundle.min.js"
+></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const swiper = new Swiper("#reservoirSwiper", {
+      // Optional parameters
+      direction: "horizontal",
+      loop: true,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+      },
+      effect: "slide",
+      speed: 600,
+
+      // If we need pagination
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+
+      // Navigation arrows
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+
+      // Responsive breakpoints
+      breakpoints: {
+        640: {
+          slidesPerView: 1,
+        },
+        768: {
+          slidesPerView: 1,
+        },
+        1024: {
+          slidesPerView: 1,
+        },
+      },
+    });
+  });
+</script>

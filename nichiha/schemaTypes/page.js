@@ -70,16 +70,26 @@ export const page = {
             ],
             annotations: [
               {
-                title: 'Link',
-                name: 'link',
-                type: 'object',
-                fields: [
-                  {
-                    title: 'URL',
-                    name: 'href',
-                    type: 'url',
-                  },
-                ],
+          title: 'Link',
+          name: 'link',
+          type: 'object',
+          fields: [
+            {
+              title: 'URL',
+              name: 'href',
+              type: 'string',
+              description: 'Supports both full URLs and internal links (e.g., /contact)',
+              validation: (Rule) =>
+                Rule.required().custom((url) => {
+            const isValidFullUrl = /^https?:\/\/.+/.test(url);
+            const isValidInternalUrl = /^\/[a-zA-Z0-9/_-]*$/.test(url);
+            if (isValidFullUrl || isValidInternalUrl) {
+              return true;
+            }
+            return 'Must be a valid URL or internal link starting with "/"';
+                }),
+            },
+          ],
               },
             ],
           },
@@ -119,20 +129,29 @@ export const page = {
             },
             {
               name: 'url',
-              type: 'url',
+              type: 'string',
               title: 'Button Link',
-              validation: (Rule) => Rule.required(),
+              description: 'Supports both full URLs and internal links (e.g., /contact)',
+              validation: (Rule) =>
+          Rule.required().custom((url) => {
+            const isValidFullUrl = /^https?:\/\/.+/.test(url);
+            const isValidInternalUrl = /^\/[a-zA-Z0-9/_-]*$/.test(url);
+            if (isValidFullUrl || isValidInternalUrl) {
+              return true;
+            }
+            return 'Must be a valid URL or internal link starting with "/"';
+          }),
             },
             {
               name: 'style',
               type: 'string',
               title: 'Button Style',
               options: {
-                list: [
-                  { title: 'Primary', value: 'primary' },
-                  { title: 'Secondary', value: 'secondary' },
-                  { title: 'Outline', value: 'outline' },
-                ],
+          list: [
+            { title: 'Primary', value: 'primary' },
+            { title: 'Secondary', value: 'secondary' },
+            { title: 'Outline', value: 'outline' },
+          ],
               },
               initialValue: 'primary',
             },

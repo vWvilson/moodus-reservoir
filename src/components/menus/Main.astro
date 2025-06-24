@@ -1,7 +1,6 @@
-
 ---
 import { loadQuery } from "../../../nichiha/lib/load-query";
-import logo from  "../../assets/mrpg-logo.jpeg";
+import logo from "../../assets/mrpg-logo.jpeg";
 
 const { data: navigation } = await loadQuery({
   query: `*[_type == "navigation"]{
@@ -25,7 +24,8 @@ const { data: navigation } = await loadQuery({
 });
 ---
 
-<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+></script>
 <nav
   x-data="{ isOpen: false, currentPath: '', scrolled: false, activeDropdown: null }"
   x-init="
@@ -42,7 +42,7 @@ const { data: navigation } = await loadQuery({
       }
       lastScrollTop = st <= 0 ? 0 : st; 
     });
-    
+
     // Close dropdown when clicking outside
     document.addEventListener('click', (e) => {
       if (!nav.contains(e.target)) {
@@ -56,19 +56,14 @@ const { data: navigation } = await loadQuery({
     <!-- Logo -->
     <div class="logo-wrapper">
       <a href="/" class="logo-link">
-        <img
-          src={logo.src}
-          loading="lazy"
-          class="logo"
-          alt="MRPG Logo"
-        />
+        <img src={logo.src} loading="lazy" class="logo" alt="MRPG Logo" />
       </a>
     </div>
 
     <!-- Hamburger Icon -->
-    <button 
-      id="menu-toggle" 
-      aria-label="Toggle Menu" 
+    <button
+      id="menu-toggle"
+      aria-label="Toggle Menu"
       @click="isOpen = !isOpen"
       :class="{ 'active': isOpen }"
     >
@@ -82,46 +77,69 @@ const { data: navigation } = await loadQuery({
       <ul class="main-menu" :class="isOpen ? 'show' : 'hide'">
         {
           navigation?.[0]?.items?.map((item, index) => {
-            const itemUrl = item.internalLink?.slug?.current 
-              ? `/${item.internalLink.slug.current}` 
+            const itemUrl = item.internalLink?.slug?.current
+              ? `/${item.internalLink.slug.current}`
               : item.url;
             const hasSubmenu = item.subItems && item.subItems.length > 0;
-            
+
             return (
-              <li 
-                class="nav-item"
-                x-data={`{ isHovered: false }`}
-                @mouseenter={hasSubmenu ? `activeDropdown = ${index}` : ''}
-                @mouseleave={hasSubmenu ? `activeDropdown = null` : ''}
-              >
-                <a
-                  href={itemUrl}
-                  class="nav-link"
-                  :class={`currentPath === '${itemUrl}' ? 'active' : ''`}
+              //
+              <li class="nav-item" x-data="{}">
+                <div
+                  class="nav-link-wrapper"
+                  style="display: flex; align-items: center;"
                 >
-                  {item.label}
+                  <a
+                    href={itemUrl}
+                    class="nav-link"
+                    x-bind:class={`currentPath === '${itemUrl}' ? 'active' : ''`}
+                  >
+                    {item.label}
+                  </a>
+
                   {hasSubmenu && (
-                    <svg class="dropdown-icon" viewBox="0 0 20 20" fill="currentColor">
-                      <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                    </svg>
+                    <button
+                      class="submenu-toggle"
+                      @click.prevent={`if (window.matchMedia('(max-width: 1100px)').matches) {
+          activeDropdown = activeDropdown === ${index} ? null : ${index};
+        }`}
+                      aria-label="Toggle Submenu"
+                      style="background: none; border: none; margin-left: 0.5rem; cursor: pointer;"
+                    >
+                      <svg
+                        class="dropdown-icon"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        width="14"
+                        height="14"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a 1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                    </button>
                   )}
-                </a>
+                </div>
 
                 {hasSubmenu && (
-                  <ul 
+                  <ul
                     class="sub-menu"
-                    :class={`activeDropdown === ${index} ? 'active' : ''`}
+                    x-bind:class={`activeDropdown === ${index} ? 'active' : ''`}
+                    x-show={`window.matchMedia('(max-width: 1100px)').matches ? activeDropdown === ${index} : true`}
                   >
                     {item.subItems.map((subItem) => {
                       const subItemUrl = subItem.internalLink?.slug?.current
                         ? `/${subItem.internalLink.slug.current}`
                         : subItem.url;
-                      
+
                       return (
                         <li class="sub-item">
                           <a
                             href={subItemUrl}
                             class="sub-link"
+                            @click="activeDropdown = null"
                           >
                             {subItem.label}
                           </a>
@@ -134,12 +152,11 @@ const { data: navigation } = await loadQuery({
             );
           })
         }
-        
+
         <!-- Contact Button -->
         <li class="nav-item contact-item">
           <a href="/contact" class="nav-link contact-btn">
             <span>Contact Us</span>
-
           </a>
         </li>
       </ul>
@@ -159,26 +176,38 @@ const { data: navigation } = await loadQuery({
     --earth-bark: #4a3c2a;
     --earth-sky: #a8c8ec;
     --earth-mist: #f5f3f0;
-    
+
     /* Gradients */
-    --earth-gradient: linear-gradient(135deg, var(--earth-deep-forest) 0%, var(--earth-moss) 100%);
-    --earth-gradient-soft: linear-gradient(135deg, rgba(45, 74, 43, 0.8) 0%, rgb(103, 142, 90) 100%);
-    
+    --earth-gradient: linear-gradient(
+      135deg,
+      var(--earth-deep-forest) 0%,
+      var(--earth-moss) 100%
+    );
+    --earth-gradient-soft: linear-gradient(
+      135deg,
+      rgba(45, 74, 43, 0.8) 0%,
+      rgb(103, 142, 90) 100%
+    );
+
     /* Spacing */
     --spacing-xs: 0.5rem;
     --spacing-sm: 1rem;
     --spacing-md: 1.5rem;
     --spacing-lg: 2rem;
     --spacing-xl: 3rem;
-    
+
     /* Typography */
     --font-size-sm: 0.875rem;
     --font-size-base: 1rem;
     --font-size-lg: 1.125rem;
-    
+
     /* Shadows */
-    --shadow-soft: 0 4px 6px -1px rgba(45, 74, 43, 0.1), 0 2px 4px -1px rgba(45, 74, 43, 0.06);
-    --shadow-medium: 0 10px 15px -3px rgba(45, 74, 43, 0.1), 0 4px 6px -2px rgba(45, 74, 43, 0.05);
+    --shadow-soft:
+      0 4px 6px -1px rgba(45, 74, 43, 0.1),
+      0 2px 4px -1px rgba(45, 74, 43, 0.06);
+    --shadow-medium:
+      0 10px 15px -3px rgba(45, 74, 43, 0.1),
+      0 4px 6px -2px rgba(45, 74, 43, 0.05);
   }
 
   /* Navigation Styles */
@@ -281,17 +310,12 @@ const { data: navigation } = await loadQuery({
     white-space: nowrap;
   }
 
-
-
   .nav-link.active {
-    color:var(--earth-sage)
-
+    color: var(--earth-sage);
   }
 
-
-
   .nav-link:hover {
-    color:var(--earth-sage)
+    color: var(--earth-sage);
   }
 
   /* Dropdown Icon */
@@ -314,7 +338,9 @@ const { data: navigation } = await loadQuery({
     left: 0;
     background: white;
     min-width: 200px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1), 0px -4px 0px rgba(0, 0, 0, 0);
+    box-shadow:
+      0px 4px 6px rgba(0, 0, 0, 0.1),
+      0px -4px 0px rgba(0, 0, 0, 0);
     opacity: 0;
     visibility: hidden;
     transform: translateY(10px);
@@ -344,8 +370,7 @@ const { data: navigation } = await loadQuery({
   }
 
   /* Contact Button */
-    /* Contact Button */
-    .contact-item {
+  .contact-item {
     margin-left: var(--spacing-sm);
   }
 
@@ -416,15 +441,20 @@ const { data: navigation } = await loadQuery({
       padding: var(--spacing-md) var(--spacing-lg);
     }
     nav.scrolled {
-    background: rgba(255, 255, 255, 0.98);
-    box-shadow: var(--shadow-medium);
-    padding: var(--spacing-lg) var(--spacing-lg);
-  }
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: var(--shadow-medium);
+      padding: var(--spacing-md) var(--spacing-md);
+    }
     #menu-toggle {
       display: block;
       position: absolute;
       top: 25px;
       right: 20px;
+    }
+
+    nav.scrolled #menu-toggle {
+      top: 15px;
+      right: 15px;
     }
 
     .main-menu {
@@ -454,14 +484,14 @@ const { data: navigation } = await loadQuery({
     .nav-link {
       color: white;
       font-size: var(--font-size-lg);
-      padding: var(--spacing-md) var(--spacing-lg);
+      padding: var(--spacing-sm);
       border-radius: 8px;
       text-align: center;
       min-width: 200px;
     }
 
     .nav-link:hover {
-      background: rgba(255, 255, 255, 0.1);
+      background: unset;
       color: var(--earth-sand);
     }
 
@@ -476,7 +506,7 @@ const { data: navigation } = await loadQuery({
 
     .sub-menu {
       position: static;
-      background: rgba(255, 255, 255, 0.1);
+      background: unset;
       box-shadow: none;
       border: none;
       border-radius: 8px;
@@ -494,8 +524,8 @@ const { data: navigation } = await loadQuery({
     }
 
     .sub-link:hover {
-      background: rgba(255, 255, 255, 0.1);
-      color: white;
+      background: unset;
+      color: unset;
     }
 
     .mobile-contact {
@@ -516,23 +546,19 @@ const { data: navigation } = await loadQuery({
 
   @media (max-width: 768px) {
     nav {
-      padding: var(--spacing-sm) var(--spacing-md);
+      padding: var(--spacing-md) var(--spacing-md);
     }
 
     .logo {
-      max-width: 50px;
+      max-width: 90px;
     }
 
     nav.scrolled .logo {
-      max-width: 40px;
+      max-width: 70px;
     }
   }
 
   @media (max-width: 480px) {
-    .nav-container {
-      padding: 0 var(--spacing-sm);
-    }
-
     .logo-text {
       display: none;
     }

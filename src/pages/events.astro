@@ -29,6 +29,7 @@ const firstDay = new Date(year, month, 1).getDay(); // 0 (Sun) - 6 (Sat)
 ---
 
 <Layout>
+  <div class="container">
   <main class="main-content">
     <h1>
       Events Calendar — {now.toLocaleString("default", { month: "long" })}
@@ -73,6 +74,7 @@ const firstDay = new Date(year, month, 1).getDay(); // 0 (Sun) - 6 (Sat)
       }
     </div>
   </main>
+  </div>
   <style>
     .calendar {
       display: grid;

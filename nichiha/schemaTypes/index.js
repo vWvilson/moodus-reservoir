@@ -24,7 +24,7 @@ export const schemaTypes = [
   event,
   blockContent,
   page,
-  linkComponent,
+  // linkComponent,
   navigation,
 
 ];

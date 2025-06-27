@@ -13,12 +13,9 @@ import Footer from "../components/Footer.astro";
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Faustina:ital,wght@0,300..800;1,300..800&family=Karla:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
     <meta name="generator" content={Astro.generator} />
   </head>
   <body>
@@ -33,139 +30,144 @@ import Footer from "../components/Footer.astro";
 
 <style is:global>
   :root {
-    /* Earth Tone Color Palette */
-    --earth-deep-forest: #2d4a2b;
-    --earth-sage: #87a96b;
-    --earth-moss: #6b8e5a;
-    --earth-clay: #c67b5c;
-    --earth-sand: #e8d5b7;
-    --earth-stone: #8b7d6b;
-    --earth-bark: rgb(55, 55, 55);
-    --earth-sky: #a8c8ec;
-    --earth-mist: #f2f2f2;
+    --lake-deep-blue: #1e3a5f;
+  --lake-azure: #4a90b8;
+  --lake-teal: #2d8599;
+  --lake-coral: #e07a5f;
+  --lake-seafoam: #81c3a4;
+  --lake-shore: #a8bfb5;
+ --lake-depth : #2c4757;
+  --lake-sky: #87ceeb;
+  --lake-mist: #f0f8ff;
 
-    /* Gradients */
-    --earth-gradient: linear-gradient(
-      135deg,
-      var(--earth-deep-forest) 0%,
-      var(--earth-moss) 100%
-    );
-    --warm-gradient: linear-gradient(
-      135deg,
-      var(--earth-clay) 0%,
-      var(--earth-sand) 100%
-    );
+  /* Gradients */
+  --lake-gradient: linear-gradient(
+    135deg,
+    var(--lake-deep-blue) 0%,
+    var(--lake-teal) 100%
+  );
+  --warm-gradient: linear-gradient(
+    135deg,
+    var(--lake-coral) 0%,
+    var(--lake-seafoam) 100%
+  );
 
-    /* Spacing */
-    --spacing-xs: 0.5rem;
-    --spacing-sm: 1rem;
-    --spacing-md: 1.5rem;
-    --spacing-lg: 2rem;
-    --spacing-xl: 3rem;
-    --spacing-2xl: 4rem;
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+  --spacing-2xl: 4rem;
 
-    /* Typography */
-    --font-size-sm: 0.875rem;
-    --font-size-base: 1rem;
-    --font-size-lg: 1.125rem;
-    --font-size-xl: 1.25rem;
-    --font-size-2xl: 1.5rem;
-    --font-size-3xl: 2rem;
-    --font-size-4xl: 3rem;
+  /* Typography */
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.35rem;
+  --font-size-2xl: 1.8rem;
+  --font-size-3xl: 2.3rem;
+  --font-size-4xl: 3.2rem;
 
-    /* Shadows */
-    --shadow-soft:
-      0 4px 6px -1px rgba(45, 74, 43, 0.1),
-      0 2px 4px -1px rgba(45, 74, 43, 0.06);
-    --shadow-medium:
-      0 10px 15px -3px rgba(45, 74, 43, 0.1),
-      0 4px 6px -2px rgba(45, 74, 43, 0.05);
-    --shadow-large:
-      0 20px 25px -5px rgba(45, 74, 43, 0.1),
-      0 10px 10px -5px rgba(45, 74, 43, 0.04);
+  /* Shadows */
+  --shadow-soft:
+    0 4px 6px -1px rgba(30, 58, 95, 0.1),
+    0 2px 4px -1px rgba(30, 58, 95, 0.06);
+  --shadow-medium:
+    0 10px 15px -3px rgba(30, 58, 95, 0.1),
+    0 4px 6px -2px rgba(30, 58, 95, 0.05);
+  --shadow-large:
+    0 20px 25px -5px rgba(30, 58, 95, 0.1),
+    0 10px 10px -5px rgba(30, 58, 95, 0.04);
 
-    --swiper-navigation-size: 30px !important;
-  }
+  --swiper-navigation-size: 30px !important;
+}
 
-  /* Global Styles */
-  * {
-    box-sizing: border-box;
-    font-family: "Jost", sans-serif;
-  }
+/* Global Styles */
+* {
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+h1 {
+  font-size: var(--font-size-4xl);
+}
+
+h2 {
+  font-size: var(--font-size-3xl);
+}
+
+h3 {
+  font-size: var(--font-size-2xl);
+}
+
+h4 {
+  font-size: var(--font-size-xl);
+}
+
+@media (max-width: 768px) {
   h1 {
-    font-size: var(--font-size-4xl);
-  }
-
-  h2 {
     font-size: var(--font-size-3xl);
   }
 
-  h3 {
+  h2 {
     font-size: var(--font-size-2xl);
   }
 
-  h4 {
+  h3 {
     font-size: var(--font-size-xl);
   }
 
-  @media (max-width: 768px) {
-    h1 {
-      font-size: var(--font-size-3xl);
-    }
+  h4 {
+    font-size: var(--font-size-lg);
+  }
+}
 
-    h2 {
-      font-size: var(--font-size-2xl);
-    }
-
-    h3 {
-      font-size: var(--font-size-xl);
-    }
-
-    h4 {
-      font-size: var(--font-size-lg);
-    }
+@media (max-width: 480px) {
+  h1 {
+    font-size: var(--font-size-2xl);
   }
 
-  @media (max-width: 480px) {
-    h1 {
-      font-size: var(--font-size-2xl);
-    }
-
-    h2 {
-      font-size: var(--font-size-xl);
-    }
-
-    h3 {
-      font-size: var(--font-size-lg);
-    }
-
-    h4 {
-      font-size: var(--font-size-base);
-    }
+  h2 {
+    font-size: var(--font-size-xl);
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    color: var(--earth-deep-forest);
-    line-height: 1.2;
-  }
-  p {
-    color: black;
-    line-height: 1.6;
+  h3 {
+    font-size: var(--font-size-lg);
   }
 
-  a {
-    color: var(--earth-clay);
-    transition: color 0.3s ease;
+  h4 {
+    font-size: var(--font-size-base);
   }
+}
 
-  a:hover {
-    color: #b56b4c;
-  }
+h1{
+  color: var(--lake-deep-blue);
+  line-height: 1.2;
+  font-family: "Karla", sans-serif;
+  font-weight: 700;
+}
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--lake-deep-blue);
+  line-height: 1.2;
+ font-family: "Karla", sans-serif;
+  font-weight: 500;
+}
+p {
+  color: black;
+  line-height: 1.6;
+  font-family: "Faustina", serif;
+}
+
+a {
+  color: var(--lake-coral);
+  transition: color 0.3s ease;
+}
+
+
   body {
     color: rgb(55, 55, 55);
     margin: 0;
@@ -184,7 +186,7 @@ import Footer from "../components/Footer.astro";
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--earth-gradient);
+    background: var(--lake-gradient);
     overflow: hidden;
   }
 
@@ -229,7 +231,7 @@ import Footer from "../components/Footer.astro";
 
   .hero-subtitle {
     font-size: var(--font-size-xl);
-    color: var(--earth-sand);
+
     font-weight: 300;
     margin: 0;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
@@ -249,7 +251,7 @@ import Footer from "../components/Footer.astro";
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--earth-gradient);
+    background: var(--lake-gradient);
     background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M30 30c0-11.046-8.954-20-20-20s-20 8.954-20 20 8.954 20 20 20 20-8.954 20-20zm0 0c0 11.046 8.954 20 20 20s20-8.954 20-20-8.954-20-20-20-20 8.954-20 20z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     text-align: center;
     color: white;
@@ -274,7 +276,7 @@ import Footer from "../components/Footer.astro";
   .hero-subtitle {
     font-size: var(--font-size-xl);
     margin: 0 0 var(--spacing-2xl) 0;
-    color: var(--earth-sand);
+
     font-weight: 300;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   }
@@ -295,7 +297,7 @@ import Footer from "../components/Footer.astro";
   .stat-number {
     font-size: var(--font-size-3xl);
     font-weight: 700;
-    color: var(--earth-sand);
+    color: var(--lake-seafoam);
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   }
 
@@ -312,22 +314,22 @@ import Footer from "../components/Footer.astro";
   }
 
   .home-section-title {
-    color: var(--earth-deep-forest);
+
     margin: 0 0 var(--spacing-md) 0;
     text-align: center;
   }
   .section-title {
     text-align: center;
-    color: var(--earth-deep-forest);
+
     margin: 0 0 var(--spacing-sm) 0;
   }
 
   .section-subtitle {
     font-size: var(--font-size-lg);
     text-align: center;
-    color: var(--earth-stone);
+
     margin: 0 0 var(--spacing-2xl) 0;
-    max-width: 600px;
+    max-width: 700px;
     margin-left: auto;
     margin-right: auto;
   }
@@ -412,7 +414,7 @@ import Footer from "../components/Footer.astro";
   /* About Section */
   .two-column-section {
     padding: var(--spacing-2xl) 0;
-    background: var(--earth-mist);
+    background: #fafafa;
   }
 
   .two-column-grid {
@@ -429,7 +431,7 @@ import Footer from "../components/Footer.astro";
   .two-column-text p {
     font-size: var(--font-size-lg);
     line-height: 1.7;
-    color: var(--earth-bark);
+
     margin-bottom: var(--spacing-md);
   }
 
@@ -458,7 +460,7 @@ import Footer from "../components/Footer.astro";
   }
 
   .initiative-card {
-    background: var(--earth-mist);
+    background:#fafafa;;
     padding: var(--spacing-xl);
     /* border-radius: 12px; */
     text-align: center;
@@ -480,12 +482,12 @@ import Footer from "../components/Footer.astro";
   .initiative-card h3 {
     font-size: var(--font-size-xl);
     font-weight: 600;
-    color: var(--earth-deep-forest);
+
     margin: 0 0 var(--spacing-md) 0;
   }
 
   .initiative-card p {
-    color: var(--earth-bark);
+
     line-height: 1.6;
     margin: 0;
   }
@@ -493,7 +495,7 @@ import Footer from "../components/Footer.astro";
   /* CTA Section */
   .cta-section {
     padding: var(--spacing-2xl) 0;
-    background: var(--earth-gradient);
+    background: var(--lake-gradient);
     text-align: center;
     color: white;
   }
@@ -508,7 +510,7 @@ import Footer from "../components/Footer.astro";
     font-size: var(--font-size-lg);
     max-width: 600px;
     margin: 0 auto var(--spacing-2xl) auto;
-    color: var(--earth-sand);
+
   }
 
   .cta-buttons {
@@ -530,36 +532,42 @@ import Footer from "../components/Footer.astro";
   }
 
   .btn-primary {
-    background: var(--earth-clay);
+    background: var(--lake-coral);
     color: white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   }
 
   .btn-primary:hover {
     background: #b56b4c;
     transform: translateY(-2px);
-    color: white;
+    box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.15);
   }
 
   .btn-secondary {
-    background: var(--earth-sage);
+    background: var(--lake-azure);
     color: white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   }
 
   .btn-secondary:hover {
-    background: #7a9760;
+    background:#417c9d;
     transform: translateY(-2px);
-    color: white;
+    box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.15);
   }
 
-  .btn-outline {
-    background: transparent;
+  .btn-seafoam{
+    background: var(--lake-seafoam);
     color: white;
-    border-color: white;
+
+    backdrop-filter: blur(10px);
   }
 
-  .btn-outline:hover {
+  .btn-seafoam:hover {
+
+    color: var(--lake-deep-blue);
+    transform: translateY(-2px);
     background: white;
-    color: var(--earth-deep-forest);
+    box-shadow: 0 6px 12px -2px rgba(255, 255, 255, 0.2);
   }
 
   /* Responsive Design */
@@ -621,7 +629,7 @@ import Footer from "../components/Footer.astro";
     }
   }
   .link a {
-    color: var(--earth-sage);
+    color: var(--lake-azure);
     text-decoration: none;
     transition: color 0.3s ease;
   }

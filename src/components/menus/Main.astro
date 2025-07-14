@@ -2,6 +2,10 @@
 import { loadQuery } from "../../../nichiha/lib/load-query";
 import logo from "../../assets/mrpg-logo.jpeg";
 
+
+
+
+
 const { data: navigation } = await loadQuery({
   query: `*[_type == "navigation"]{
       title,
@@ -160,6 +164,8 @@ const { data: navigation } = await loadQuery({
           </a>
         </li>
       </ul>
+
+
     </div>
   </div>
 </nav>

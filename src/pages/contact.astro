@@ -20,11 +20,7 @@ import Layout from "../layouts/Layout.astro";
             <input type="radio" name="inquiryType" value="volunteer" required />
             <div class="option-card">
               <div class="option-icon volunteer-icon">
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                  <path
-                    d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A1.5 1.5 0 0 0 18.54 8H16c-.8 0-1.54.37-2.01.99L12 11l-1.99-2.01A2.5 2.5 0 0 0 8 8H5.46c-.8 0-1.49.59-1.61 1.37L1.31 18H3.8v6h16.2z"
-                  ></path>
-                </svg>
+                <i class="fa fa-handshake-o"></i>
               </div>
               <h4>Volunteer</h4>
               <p>Join our conservation efforts</p>
@@ -40,11 +36,7 @@ import Layout from "../layouts/Layout.astro";
             />
             <div class="option-card">
               <div class="option-icon merch-icon">
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                  <path
-                    d="M7 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12L8.1 13h7.45c.75 0 1.41-.41 1.75-1.03L21.7 4H5.21l-.94-2H1zm16 16c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
-                  ></path>
-                </svg>
+                <i class="fa fa-shopping-cart"></i>
               </div>
               <h4>Buy Merch</h4>
               <p>Support us with a purchase</p>
@@ -55,11 +47,7 @@ import Layout from "../layouts/Layout.astro";
             <input type="radio" name="inquiryType" value="general" required />
             <div class="option-card">
               <div class="option-icon general-icon">
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                  <path
-                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"
-                  ></path>
-                </svg>
+                <i class="fa fa-question-circle-o"></i>
               </div>
               <h4>General Inquiry</h4>
               <p>Questions or information</p>
@@ -244,6 +232,14 @@ import Layout from "../layouts/Layout.astro";
   </div>
 
   <style>
+    .contact-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--spacing-2xl) var(--spacing-lg);
+      background: white;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-large);
+    }
     .contact-header {
       background: #0c3a73;
       color: white;
@@ -319,9 +315,8 @@ import Layout from "../layouts/Layout.astro";
     }
 
     .option-card {
-      background: var(--lake-seafoam);
-      border: 2px solid transparent;
-      border-radius: var(--radius-lg);
+      border-top: 6px solid var(--lake-seafoam);
+      box-shadow: var(--shadow-medium);
       padding: var(--spacing-lg);
       text-align: center;
       transition: all 0.3s ease;
@@ -333,7 +328,7 @@ import Layout from "../layouts/Layout.astro";
 
     .option-card:hover {
       transform: translateY(-2px);
-      box-shadow: var(--shadow-medium);
+      box-shadow: var(--shadow-large);
     }
 
     .inquiry-option input[type="radio"]:checked + .option-card {
@@ -341,36 +336,23 @@ import Layout from "../layouts/Layout.astro";
       background: white;
       box-shadow: var(--shadow-medium);
     }
+.fa {
+      font-size: 24px;
+      color: var(--lake-deep-blue);
+    }
+
 
     .option-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       margin-bottom: var(--spacing-sm);
     }
 
-    .volunteer-icon {
-      background: linear-gradient(135deg, var(--lake-deep-blue), var(--earth-moss));
-      color: white;
-    }
 
-    .merch-icon {
-      background: linear-gradient(135deg, var(--earth-clay), #d4844a);
-      color: white;
-    }
 
-    .general-icon {
-      background: linear-gradient(135deg, var(--earth-sky), #9bb8d6);
-      color: white;
-    }
+  
 
-    .option-icon svg {
-      width: 24px;
-      height: 24px;
-    }
 
     .option-card h4 {
       font-size: var(--font-size-lg);
@@ -466,11 +448,9 @@ import Layout from "../layouts/Layout.astro";
     /* Submit Button */
     .submit-btn {
 
-      background: linear-gradient(
-        135deg,
-        var(--lake-deep-blue) 0%,
-        var(--earth-moss) 100%
-      );
+      background:  var(--lake-seafoam);
+    color: white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
       color: white;
       border: none;
       padding: var(--spacing-md) var(--spacing-lg);
@@ -598,9 +578,14 @@ import Layout from "../layouts/Layout.astro";
         margin-bottom: var(--spacing-lg);
       }
     }
+
+
+
+
+    
   </style>
 
-  <script>
+  <!-- <script>
     // Form functionality
     const form = document.getElementById("contactForm");
     const dynamicSection = document.getElementById("dynamicSection");
@@ -634,5 +619,5 @@ import Layout from "../layouts/Layout.astro";
         dynamicSection.style.display = "block";
       });
     });
-  </script>
+  </script> -->
 </Layout>

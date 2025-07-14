@@ -1,3 +1,8 @@
+---
+import fb from "../assets/fb.svg";
+import logo from "../assets/mrpg-logo.jpeg";
+---
+
 <!-- Get Involved Section -->
 <footer>
   <section class="cta-section">
@@ -17,18 +22,46 @@
     </div>
   </section>
   <div class="bottom-footer">
-    <p>
-      © {new Date().getFullYear()} Moodus Reservoir Preservation Group, Inc. Association.
-      All rights reserved.
-    </p>
+    <div class="logo-wrapper">
+      <a href="/" class="logo-link">
+        <img src={logo.src} loading="lazy" class="logo" alt="MRPG Logo" />
+      </a>
+      <p>
+        © {new Date().getFullYear()} Moodus Reservoir Preservation Group, Inc. Association.
+        All rights reserved.
+      </p>
+    </div>
+
+    <!-- <div class="footer-menu">
+      <p><a href="/about">ABOUT</a></p>
+      <p><a href="/contact">CONTACT</a></p>
+      <p><a href="events">EVENTS</a></p>
+
+    </div> -->
+
+    <div class="contact-footer">
+      <a
+        href="https://www.facebook.com/profile.php?id=100067067184783&fref=ts#"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img src={fb.src} alt="Facebook" class="contact-icon" />
+      </a>
+
+      <p>
+        PO Box 301<br />
+        Moodus CT 06469
+      </p>
+    </div>
   </div>
 </footer>
 
 <style>
   footer {
-
     position: relative;
-    z-index: 1; 
+    z-index: 1;
+    font-family: "Karla", sans-serif;
+
   }
 
   /* CTA Section */
@@ -37,13 +70,13 @@
     text-align: center;
     color: white;
     position: relative;
-    z-index: 3; 
+    z-index: 3;
   }
 
   .cta-section::before {
     content: "";
     position: absolute;
-   mix-blend-mode: multiply;
+    mix-blend-mode: multiply;
     top: 0;
     left: 0;
     width: 100%;
@@ -53,7 +86,7 @@
     background-repeat: no-repeat;
     background-position: center;
     opacity: 0.2;
-    z-index: -1;  
+    z-index: -1;
   }
 
   .cta-content {
@@ -119,33 +152,56 @@
   }
 
   .btn-secondary:hover {
-    background:#417c9d;
+    background: #417c9d;
     transform: translateY(-2px);
     box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.15);
   }
 
-  .btn-seafoam{
+  .btn-seafoam {
     background: var(--lake-seafoam);
     color: white;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   }
 
   .btn-seafoam:hover {
-color:white;
-   
+    color: white;
+
     transform: translateY(-2px);
-    background:#6ca38a;
+    background: #6ca38a;
     box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.15);
   }
 
   .bottom-footer {
-    background: white;
-    color: white;
+    display: flex;
+    max-width: 1200px;
+    flex: 1 100%;
+    margin: 20px auto;
+    justify-content: space-between;
+    align-items: center;
     padding: var(--spacing-sm) 0;
-    text-align: center;
     font-size: var(--font-size-sm);
     position: relative;
-    z-index: 2; /* Above footer background but below CTA */
+    z-index: 2; 
+  }
+  .logo-wrapper {
+    max-width: 300px;
+}
+
+.logo {
+    width: 100%;
+    height: auto;
+max-width: 150px;
+
+}
+
+.footer-menu a {
+    color: var(--lake-azure);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+  .footer-menu a:hover {
+    color: var(--lake-coral);
   }
 
   /* Mobile responsiveness */

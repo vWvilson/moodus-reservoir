@@ -182,7 +182,7 @@ const { data: navigation } = await loadQuery({
     font-size: var(--font-size-base);
     position: fixed;
     top: 0;
-    z-index: 1000;
+    z-index: 500;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border-bottom: 1px solid rgba(45, 74, 43, 0.1);
   }
@@ -367,9 +367,7 @@ const { data: navigation } = await loadQuery({
     transition: all 0.3s ease;
   }
 
-  #menu-toggle:hover {
-    background: var(--lake-mist);
-  }
+
 
   .menu-icon {
     display: block;
@@ -381,17 +379,22 @@ const { data: navigation } = await loadQuery({
     border-radius: 2px;
   }
 
+
+
   .menu-icon.open:nth-child(1) {
     transform: translateY(8px) rotate(45deg);
+   background:white;
   }
 
   .menu-icon.open:nth-child(2) {
     opacity: 0;
     transform: scale(0);
+   background: white;
   }
 
   .menu-icon.open:nth-child(3) {
     transform: translateY(-8px) rotate(-45deg);
+   background: white;
   }
 
   /* Mobile Styles */
@@ -409,6 +412,7 @@ const { data: navigation } = await loadQuery({
       position: absolute;
       top: 25px;
       right: 20px;
+      z-index: 1001;
     }
 
     nav.scrolled #menu-toggle {
@@ -419,12 +423,12 @@ const { data: navigation } = await loadQuery({
     .main-menu {
       position: fixed;
       top: 0;
+      padding-top: var(--spacing-2xl);
       left: 0;
       width: 100%;
       height: 100vh;
       background: var(--lake-depth);
       flex-direction: column;
-      justify-content: center;
       align-items: center;
       gap: var(--spacing-lg);
       opacity: 0;
@@ -462,6 +466,12 @@ const { data: navigation } = await loadQuery({
     .nav-link::after {
       display: none;
     }
+    .dropdown-icon {
+
+    fill: white;
+
+
+  }
 
     .sub-menu {
       position: static;
@@ -478,7 +488,7 @@ const { data: navigation } = await loadQuery({
     }
 
     .sub-link {
-      color: var(lake-seafoam);
+      color: white;
       text-align: center;
     }
 

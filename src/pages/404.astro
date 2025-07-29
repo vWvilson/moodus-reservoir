@@ -1,0 +1,306 @@
+---
+import Layout from "../layouts/Layout.astro";
+import mr3 from "../assets/mr-3.jpeg";
+---
+
+<Layout>
+  <!-- 404 Error Section -->
+  <section class="error-section">
+    <div class="container">
+      <div class="error-content">
+        <div class="error-visual">
+          <div class="error-number">404</div>
+          <div class="error-wave">
+            <svg viewBox="0 0 400 100" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0,50 Q100,20 200,50 T400,50 L400,100 L0,100 Z" fill="rgba(59, 130, 246, 0.1)"/>
+              <path d="M0,60 Q100,30 200,60 T400,60 L400,100 L0,100 Z" fill="rgba(59, 130, 246, 0.05)"/>
+            </svg>
+          </div>
+        </div>
+        
+        <div class="error-text">
+          <h1 class="error-title">Page Not Found</h1>
+          <p class="error-description">
+            We couldn't find the page you're looking for. 
+            The content might have been moved, removed, or never existed.
+          </p>
+          
+          <div class="error-suggestions">
+            <h3>Where would you like to go?</h3>
+            <div class="suggestion-links">
+              <a href="/" class="btn btn-primary">
+                🏠 Return Home
+              </a>
+              <a href="/about" class="btn btn-secondary">
+                ℹ️ About MRPG
+              </a>
+              <a href="/contact" class="btn btn-secondary">
+                📧 Contact Us
+              </a>
+            </div>
+          </div>
+          
+          <div class="error-help">
+            <p class="help-text">
+              If you believe this is an error, please <a href="/contact" class="help-link">contact us</a> 
+              and let us know what you were looking for.
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="error-image">
+        <img src={mr3.src} alt="Peaceful view of Moodus Reservoir" />
+        <div class="image-overlay">
+          <p class="overlay-text">Even when lost, the beauty of Moodus Reservoir remains</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .error-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 2rem 0;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .error-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    margin-bottom: 3rem;
+  }
+
+  .error-visual {
+    position: relative;
+    text-align: center;
+  }
+
+  .error-number {
+    font-size: 8rem;
+    font-weight: 900;
+    color: #3b82f6;
+    text-shadow: 2px 2px 0px #1e40af;
+    margin-bottom: 1rem;
+    font-family: 'Arial', sans-serif;
+    line-height: 1;
+  }
+
+  .error-wave {
+    position: absolute;
+    bottom: -2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 60px;
+  }
+
+  .error-wave svg {
+    width: 100%;
+    height: 100%;
+    animation: wave 3s ease-in-out infinite;
+  }
+
+  @keyframes wave {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .error-text {
+    text-align: left;
+  }
+
+  .error-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+
+  .error-description {
+    font-size: 1.2rem;
+    color: #64748b;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+
+  .error-suggestions h3 {
+    font-size: 1.5rem;
+    color: #1e40af;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+  }
+
+  .suggestion-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+  }
+
+  .btn-primary {
+    background-color: #3b82f6;
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background-color: #2563eb;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  }
+
+  .btn-secondary {
+    background-color: transparent;
+    color: #3b82f6;
+    border-color: #3b82f6;
+  }
+
+  .btn-secondary:hover {
+    background-color: #3b82f6;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+  }
+
+  .error-help {
+    border-top: 1px solid #e2e8f0;
+    padding-top: 1.5rem;
+  }
+
+  .help-text {
+    color: #64748b;
+    font-size: 0.95rem;
+  }
+
+  .help-link {
+    color: #3b82f6;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .help-link:hover {
+    text-decoration: underline;
+  }
+
+  .error-image {
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  }
+
+  .error-image img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+    padding: 2rem 1.5rem 1.5rem;
+  }
+
+  .overlay-text {
+    color: white;
+    font-size: 1.1rem;
+    font-style: italic;
+    text-align: center;
+    margin: 0;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .error-section {
+      padding: 1rem 0;
+    }
+
+    .error-content {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      text-align: center;
+    }
+
+    .error-text {
+      text-align: center;
+    }
+
+    .error-number {
+      font-size: 6rem;
+    }
+
+    .error-title {
+      font-size: 2.5rem;
+    }
+
+    .error-description {
+      font-size: 1.1rem;
+    }
+
+    .suggestion-links {
+      justify-content: center;
+    }
+
+    .btn {
+      padding: 0.75rem 1.25rem;
+      font-size: 0.95rem;
+    }
+
+    .error-image {
+      margin-top: 2rem;
+    }
+
+    .error-image img {
+      height: 300px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .error-number {
+      font-size: 5rem;
+    }
+
+    .error-title {
+      font-size: 2rem;
+    }
+
+    .suggestion-links {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .btn {
+      width: 100%;
+      max-width: 250px;
+      justify-content: center;
+    }
+  }
+</style>

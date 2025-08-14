@@ -207,13 +207,8 @@ const eventDate = new Date(event.date);
         <div class="detail-item">
           <dt>Date & Time</dt>
           <dd>
-            {eventDate.toLocaleDateString('en-US', { 
-              weekday: 'long', 
-              year: 'numeric', 
-              month: 'long', 
-              day: 'numeric'
-            })}
-            at {eventDate.toLocaleString('en-US', { 
+         
+             {eventDate.toLocaleString('en-US', { 
               timeZone: 'America/New_York',
               weekday: 'long',
               year: 'numeric',

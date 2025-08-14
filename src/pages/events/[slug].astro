@@ -213,9 +213,15 @@ const eventDate = new Date(event.date);
               month: 'long', 
               day: 'numeric'
             })}
-            at {eventDate.toLocaleTimeString('en-US', { 
-              hour: '2-digit', 
+            at {eventDate.toLocaleString('en-US', { 
+              timeZone: 'America/New_York',
+              weekday: 'long',
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+              hour: '2-digit',
               minute: '2-digit'
+            
             })}
           </dd>
         </div>

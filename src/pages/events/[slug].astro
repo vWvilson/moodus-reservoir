@@ -14,27 +14,20 @@ export async function getStaticPaths() {
     description,
     image
   }`;
-  
+
   const { data: events } = await loadQuery({ query });
-  
-  console.log('Events fetched:', events);
+
+  console.log('Events fetched at build:', JSON.stringify(events, null, 2));
   console.log('Number of events:', events?.length);
-  
-  if (!events || !Array.isArray(events)) {
-    console.log('No events found or not an array');
-    return [];
+
+  if (!events || !Array.isArray(events) || !events.length) {
+    throw new Error("No events found from Sanity at build time!");
   }
-  
-  const paths = events.map((event) => {
-    console.log('Creating path for:', event.slug?.current);
-    return {
-      params: { slug: event.slug.current },
-      props: { event },
-    };
-  });
-  
-  console.log('Generated paths:', paths);
-  return paths;
+
+  return events.map((event) => ({
+    params: { slug: event.slug.current },
+    props: { event },
+  }));
 }
 
 const { event } = Astro.props;

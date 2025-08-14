@@ -163,13 +163,15 @@ const eventDate = new Date(event.date);
         <div class="meta-item">
           <span>📅</span>
           <time datetime={event.date}>
-            {eventDate.toLocaleDateString('en-US', { 
-              weekday: 'long', 
-              year: 'numeric', 
-              month: 'long', 
+            {eventDate.toLocaleString('en-US', { 
+              timeZone: 'America/New_York',
+              weekday: 'long',
+              year: 'numeric',
+              month: 'long',
               day: 'numeric',
               hour: '2-digit',
               minute: '2-digit'
+            
             })}
           </time>
         </div>

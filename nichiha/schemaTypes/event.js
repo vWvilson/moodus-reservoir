@@ -21,7 +21,9 @@ export const event = {
         name: 'date',
         type: 'datetime',
         title: 'Event Date',
+        description: 'Select the date and time (24-hour format: 13:00 = 1:00 PM, 00:00 = midnight)',
       },
+      
       {
         name: 'location',
         type: 'string',

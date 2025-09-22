@@ -81,13 +81,14 @@ export const page = {
               description: 'Supports both full URLs and internal links (e.g., /contact)',
               validation: (Rule) =>
                 Rule.required().custom((url) => {
-            const isValidFullUrl = /^https?:\/\/.+/.test(url);
-            const isValidInternalUrl = /^\/[a-zA-Z0-9/_-]*$/.test(url);
-            if (isValidFullUrl || isValidInternalUrl) {
-              return true;
-            }
-            return 'Must be a valid URL or internal link starting with "/"';
+                  const isValidFullUrl = /^https?:\/\/.+/.test(url);
+                  const isValidInternalUrl = /^\/[a-zA-Z0-9._/-]*$/.test(url);
+                  if (isValidFullUrl || isValidInternalUrl) {
+                    return true;
+                  }
+                  return 'Must be a valid URL or internal link starting with "/"';
                 }),
+              
             },
           ],
               },

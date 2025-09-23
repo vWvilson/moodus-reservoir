@@ -61,6 +61,7 @@ import logo from "../assets/mrpg-logo.jpeg";
     position: relative;
     z-index: 1;
     font-family: "Karla", sans-serif;
+
   }
   p {
     font-size: 14px;
@@ -180,7 +181,7 @@ import logo from "../assets/mrpg-logo.jpeg";
     flex: 1 100%;
     margin: 20px auto;
     justify-content: space-between;
-    padding: var(--spacing-sm) 0;
+    padding: var(--spacing-md) var(--spacing-lg);
     font-size: var(--font-size-sm);
     position: relative;
     z-index: 2;
@@ -213,6 +214,13 @@ import logo from "../assets/mrpg-logo.jpeg";
 
   /* Mobile responsiveness */
   @media (max-width: 768px) {
+    .bottom-footer {
+    display: flex;
+   flex-direction: column;
+    flex: 1 100%;
+    align-items: center;
+    text-align: center;
+  }
     .cta-section {
       padding: var(--spacing-xl) 0;
     }

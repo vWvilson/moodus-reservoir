@@ -5,11 +5,24 @@
 //   import.meta.env.PUBLIC_SANITY_VISUAL_EDITING_ENABLED == "true";
 import Main from "../components/menus/Main.astro";
 import Footer from "../components/Footer.astro";
+
+const GA_ID = "G-RQKQF0TCKP";
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQKQF0TCKP"
+    ></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "{{GA_ID}}");
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link
@@ -27,427 +40,437 @@ import Footer from "../components/Footer.astro";
     <meta name="generator" content={Astro.generator} />
   </head>
   <body>
-    
-      <div id="myModal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button class="close-button" id="closeModal">×</button>
-                <h1 class="modal-title">Save Our Lake</h1>
-                <p class="modal-subtitle">Community Raffle 2026</p>
-            </div>
-
-            <div class="modal-body">
-                <div class="section">
-                    <h3 class="section-title" style="font-size:28px">Prizes</h3>
-                    <div class="prizes-container">
-                        <div class="prize-card">
-                            <div class="prize-content">
-                                <div class="prize-icon">🛶</div>
-                                <div class="prize-details">
-                                    <h4>1st Prize</h4>
-                                    <p>Carbon Fiber Canoe</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="prize-card">
-                            <div class="prize-content">
-                                <div class="prize-icon">📺</div>
-                                <div class="prize-details">
-                                    <h4>2nd Prize</h4>
-                                    <p>50" Smart TV</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="prize-card">
-                            <div class="prize-content">
-                                <div class="prize-icon">💳</div>
-                                <div class="prize-details">
-                                    <h4>3rd Prize</h4>
-                                    <p>$250 Prepaid Gift Card </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="info-grid">
-                    <div class="info-card">
-                        <span class="info-icon">🎟️</span>
-                        <h4>Ticket Info</h4>
-                        <p><strong>Only $20</strong><br>Limited to 400 tickets<br>Great odds of winning!</p>
-                    </div>
-                    <div class="info-card">
-                        <span class="info-icon">📅</span>
-                        <h4>Drawing Date</h4>
-                        <p><strong>July 12, 2026</strong><br>Moodus Sportsman's Club<br>No need to be present</p>
-                    </div>
-                </div>
-
-                <div class="cta-section">
-                    <a href="https://www.paypal.com/ncp/payment/MT7ZNBZMLWCLW" 
-                       target="_blank" 
-                       class="modal-cta-button">
-                        Purchase Tickets Now
-                    </a>
-                </div>
-            </div>
+    <div id="myModal" class="modal" style="display: none;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button class="close-button" id="closeModal">×</button>
+          <h1 class="modal-title">Save Our Lake</h1>
+          <p class="modal-subtitle">Community Raffle 2026</p>
         </div>
+
+        <div class="modal-body">
+          <div class="section">
+            <h3 class="section-title" style="font-size:28px">Prizes</h3>
+            <div class="prizes-container">
+              <div class="prize-card">
+                <div class="prize-content">
+                  <div class="prize-icon">🛶</div>
+                  <div class="prize-details">
+                    <h4>1st Prize</h4>
+                    <p>Carbon Fiber Canoe</p>
+                  </div>
+                </div>
+              </div>
+              <div class="prize-card">
+                <div class="prize-content">
+                  <div class="prize-icon">📺</div>
+                  <div class="prize-details">
+                    <h4>2nd Prize</h4>
+                    <p>50" Smart TV</p>
+                  </div>
+                </div>
+              </div>
+              <div class="prize-card">
+                <div class="prize-content">
+                  <div class="prize-icon">💳</div>
+                  <div class="prize-details">
+                    <h4>3rd Prize</h4>
+                    <p>$250 Prepaid Gift Card</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-grid">
+            <div class="info-card">
+              <span class="info-icon">🎟️</span>
+              <h4>Ticket Info</h4>
+              <p>
+                <strong>Only $20</strong><br />Limited to 400 tickets<br />Great
+                odds of winning!
+              </p>
+            </div>
+            <div class="info-card">
+              <span class="info-icon">📅</span>
+              <h4>Drawing Date</h4>
+              <p>
+                <strong>July 12, 2026</strong><br />Moodus Sportsman's Club<br
+                />No need to be present
+              </p>
+            </div>
+          </div>
+
+          <div class="cta-section">
+            <a
+              href="https://www.paypal.com/ncp/payment/MT7ZNBZMLWCLW"
+              target="_blank"
+              class="modal-cta-button"
+            >
+              Purchase Tickets Now
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="layout-container">
-
-
       <Main />
       <slot />
-
     </div>
     <Footer />
   </body>
 </html>
 
 <style is:global>
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(30, 58, 95, 0.9);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+    opacity: 1;
+    animation: fadeIn 0.3s ease-out;
+  }
 
-.modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(30, 58, 95, 0.9);
-            backdrop-filter: blur(8px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            padding: 20px;
-            opacity: 1;
-            animation: fadeIn 0.3s ease-out;
-        }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+  @keyframes slideUp {
+    from {
+      transform: translateY(30px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
 
-        @keyframes slideUp {
-            from { 
-                transform: translateY(30px);
-                opacity: 0;
-            }
-            to { 
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
+  .modal-content {
+    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
 
-        .modal-content {
-            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
-         
-            box-shadow: var(--shadow-large), 0 0 40px rgba(129, 195, 164, 0.2);
-            max-width: 600px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-            animation: slideUp 0.4s ease-out;
-            border: 1px solid rgba(129, 195, 164, 0.2);
-        }
+    box-shadow:
+      var(--shadow-large),
+      0 0 40px rgba(129, 195, 164, 0.2);
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: slideUp 0.4s ease-out;
+    border: 1px solid rgba(129, 195, 164, 0.2);
+  }
 
-        .modal-header {
-            background: var(--lake-gradient);
-            padding: 2rem 2rem 3rem;
-            position: relative;
-            text-align: center;
-            overflow: hidden;
-        }
-        .modal-header h1,
-        .modal-header p {
-            color: white !important;
-        }
+  .modal-header {
+    background: var(--lake-gradient);
+    padding: 2rem 2rem 3rem;
+    position: relative;
+    text-align: center;
+    overflow: hidden;
+  }
+  .modal-header h1,
+  .modal-header p {
+    color: white !important;
+  }
 
-        .modal-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
-            opacity: 0.3;
-        }
+  .modal-header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")
+      repeat;
+    opacity: 0.3;
+  }
 
-        .close-button {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 20px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            z-index: 10;
-        }
+  .close-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    z-index: 10;
+  }
 
-        .close-button:hover {
-            background: rgba(255, 255, 255, 0.3);
-            border-color: rgba(255, 255, 255, 0.5);
-            transform: scale(1.1);
-        }
+  .close-button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: scale(1.1);
+  }
 
-        .modal-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            position: relative;
-            z-index: 5;
-        }
+  .modal-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 5;
+  }
 
-        .modal-subtitle {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            font-weight: 400;
-            position: relative;
-            z-index: 5;
-        }
+  .modal-subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    font-weight: 400;
+    position: relative;
+    z-index: 5;
+  }
 
-        .modal-body {
-            padding: 2rem;
-        }
+  .modal-body {
+    padding: 2rem;
+  }
 
-        .section {
-            margin-bottom: 2rem;
-        }
+  .section {
+    margin-bottom: 2rem;
+  }
 
-        .section-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--lake-deep-blue);
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
+  .section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--lake-deep-blue);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
 
+  .prizes-container {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
 
+  .prize-card {
+    background: var(--prize-gradient);
+    border: 2px solid transparent;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-soft);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
 
-        .prizes-container {
-            display: grid;
-            gap: 1rem;
-            margin-bottom: 0.5rem;
-        }
+  .prize-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--warm-gradient);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+  }
 
-        .prize-card {
-            background: var(--prize-gradient);
-            border: 2px solid transparent;
-            border-radius: 16px;
-            padding: 1.5rem;
-            box-shadow: var(--shadow-soft);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
+  .prize-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+    border-color: var(--lake-seafoam);
+  }
 
-        .prize-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: var(--warm-gradient);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: 1;
-        }
+  .prize-card:hover::before {
+    opacity: 0.05;
+  }
 
-        .prize-card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-medium);
-            border-color: var(--lake-seafoam);
-        }
+  .prize-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
 
-        .prize-card:hover::before {
-            opacity: 0.05;
-        }
+  .prize-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
 
-        .prize-content {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
+  .prize-card:nth-child(1) .prize-icon {
+    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+  }
 
-        .prize-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            flex-shrink: 0;
-        }
+  .prize-card:nth-child(2) .prize-icon {
+    background: linear-gradient(135deg, #c0c0c0 0%, #e5e5e5 100%);
+  }
 
-        .prize-card:nth-child(1) .prize-icon {
-            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
-        }
+  .prize-card:nth-child(3) .prize-icon {
+    background: linear-gradient(135deg, #cd7f32 0%, #deb887 100%);
+  }
 
-        .prize-card:nth-child(2) .prize-icon {
-            background: linear-gradient(135deg, #c0c0c0 0%, #e5e5e5 100%);
-        }
+  .prize-details h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--lake-deep-blue);
+    margin-bottom: 0.25rem;
+  }
 
-        .prize-card:nth-child(3) .prize-icon {
-            background: linear-gradient(135deg, #cd7f32 0%, #deb887 100%);
-        }
+  .prize-details p {
+    color: var(--lake-depth);
+    font-size: 0.95rem;
+    opacity: 0.8;
+  }
 
-        .prize-details h4 {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--lake-deep-blue);
-            margin-bottom: 0.25rem;
-        }
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
 
-        .prize-details p {
-            color: var(--lake-depth);
-            font-size: 0.95rem;
-            opacity: 0.8;
-        }
+  .info-card {
+    background: rgba(129, 195, 164, 0.1);
+    border: 2px solid rgba(129, 195, 164, 0.2);
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
 
-        .info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
+  .info-card:hover {
+    background: rgba(129, 195, 164, 0.15);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-soft);
+  }
 
-        .info-card {
-            background: rgba(129, 195, 164, 0.1);
-            border: 2px solid rgba(129, 195, 164, 0.2);
-            border-radius: 16px;
-            padding: 1.5rem;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
+  .info-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
 
-        .info-card:hover {
-            background: rgba(129, 195, 164, 0.15);
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-soft);
-        }
+  .info-card h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--lake-deep-blue);
+    margin-bottom: 0.5rem;
+  }
 
-        .info-icon {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
+  .info-card p {
+    color: var(--lake-depth);
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
 
-        .info-card h4 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--lake-deep-blue);
-            margin-bottom: 0.5rem;
-        }
+  .cta-section {
+    text-align: center;
+    padding: 1.5rem 0;
+    border-top: 1px solid rgba(129, 195, 164, 0.2);
+  }
 
-        .info-card p {
-            color: var(--lake-depth);
-            font-size: 0.9rem;
-            line-height: 1.4;
-        }
+  .modal-cta-button {
+    background: var(--lake-coral);
+    color: white;
+    padding: 1rem 2.5rem;
+    /* border-radius: 50px; */
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    box-shadow: var(--shadow-medium);
+    transition: all 0.3s ease;
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
 
-        .cta-section {
-            text-align: center;
-            padding: 1.5rem 0;
-            border-top: 1px solid rgba(129, 195, 164, 0.2);
-        }
+  .modal-cta-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
+    transition: left 0.6s;
+  }
 
-        .modal-cta-button {
-            background: var(--lake-coral);
-            color: white;
-            padding: 1rem 2.5rem;
-            /* border-radius: 50px; */
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            box-shadow: var(--shadow-medium);
-            transition: all 0.3s ease;
-            display: inline-block;
-            border: none;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
+  .modal-cta-button:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: var(--shadow-large), var(--shadow-glow);
+  }
 
-        .modal-cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.6s;
-        }
+  .modal-cta-button:hover::before {
+    left: 100%;
+  }
 
-        .modal-cta-button:hover {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: var(--shadow-large), var(--shadow-glow);
-        }
+  .modal-cta-button:active {
+    transform: translateY(0) scale(0.98);
+  }
 
-        .modal-cta-button:hover::before {
-            left: 100%;
-        }
+  @media (max-width: 640px) {
+    .modal-content {
+      margin: 10px;
+    }
 
-        .modal-cta-button:active {
-            transform: translateY(0) scale(0.98);
-        }
+    .modal-header {
+      padding: 1.5rem 1.5rem 2rem;
+    }
 
-        @media (max-width: 640px) {
-            .modal-content {
-                margin: 10px;
-               
-            }
-            
-            .modal-header {
-                padding: 1.5rem 1.5rem 2rem;
-            
-            }
-            
-            .modal-title {
-                font-size: 1.8rem;
-            }
-            
-            .modal-body {
-                padding: 1.5rem;
-            }
-            
-            .info-grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-            
-            .prize-content {
-                flex-direction: column;
-                text-align: center;
-                gap: 0.75rem;
-            }
-            
-            .modal-cta-button {
-                padding: 0.875rem 2rem;
-                font-size: 1rem;
-            }
-        }
+    .modal-title {
+      font-size: 1.8rem;
+    }
 
+    .modal-body {
+      padding: 1.5rem;
+    }
+
+    .info-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .prize-content {
+      flex-direction: column;
+      text-align: center;
+      gap: 0.75rem;
+    }
+
+    .modal-cta-button {
+      padding: 0.875rem 2rem;
+      font-size: 1rem;
+    }
+  }
 
   :root {
     --lake-deep-blue: #1e3a5f;
@@ -1075,41 +1098,36 @@ import Footer from "../components/Footer.astro";
   }
 </style>
 <script>
-
-
-
   var modal = document.getElementById("myModal");
 
+  const closeBtn = document.getElementById("closeModal");
 
-    const closeBtn = document.getElementById('closeModal');
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!sessionStorage.getItem("modalShown")) {
+      modal.style.display = "flex";
+      document.body.style.overflow = "hidden";
+      sessionStorage.setItem("modalShown", "true");
+    }
+  });
 
+  function hideModal() {
+    modal.style.display = "none";
+    document.body.style.overflow = "auto";
+  }
 
-    document.addEventListener("DOMContentLoaded", function () {
-      if (!sessionStorage.getItem('modalShown')) {
-        modal.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-        sessionStorage.setItem('modalShown', 'true');
-      }
-    });
+  closeBtn.addEventListener("click", hideModal);
 
-    function hideModal() {
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
+  // Close modal when clicking outside
+  modal.addEventListener("click", function (e) {
+    if (e.target === modal) {
+      hideModal();
+    }
+  });
 
-        closeBtn.addEventListener('click', hideModal);
-
-        // Close modal when clicking outside
-        modal.addEventListener('click', function(e) {
-            if (e.target === modal) {
-                hideModal();
-            }
-        });
-
-        // Close modal with Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && modal.style.display === 'flex') {
-                hideModal();
-            }
-        });
+  // Close modal with Escape key
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && modal.style.display === "flex") {
+      hideModal();
+    }
+  });
 </script>

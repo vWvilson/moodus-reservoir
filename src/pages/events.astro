@@ -2,6 +2,7 @@
 // src/pages/events.astro
 import { loadQuery } from "../../nichiha/lib/load-query";
 import Layout from "../layouts/Layout.astro";
+import hero from "../assets/hero-events.png";
 
 // Load events from Sanity
 const query = `*[_type == "event"] {
@@ -21,8 +22,8 @@ for (const event of events) {
 }
 
 // --- Handle month offset via query param ---
-const urlParams = new URLSearchParams(Astro.request.url.split('?')[1]);
-const offset = parseInt(urlParams.get('month')) || 0;
+const urlParams = new URLSearchParams(Astro.request.url.split("?")[1]);
+const offset = parseInt(urlParams.get("month")) || 0;
 
 const baseNow = new Date();
 const current = new Date(baseNow.getFullYear(), baseNow.getMonth() + offset, 1);
@@ -34,22 +35,73 @@ const daysInMonth = new Date(year, month + 1, 0).getDate();
 // Check if date is today
 const today = new Date().toISOString().split("T")[0];
 ---
+
 <Layout>
+  <div class="events-hero">
+    <img src={hero.src} alt="Events Hero" class="hero-image" />
+    <div>
+      <h3>
+        Tickets are $20, only 400 to be sold <br /> Drawing held July 12, 2026 -
+        at the Moodus Sportsmen's Club <br /> No need to be present
+      </h3>
+      <div>
+        <a
+          href="https://www.paypal.com/ncp/payment/MT7ZNBZMLWCLW"
+          class="btn btn-seafoam"
+          data-astro-cid-sz7xmlte="">Purchase Tickets</a
+        >
+        <p style="margin-top: 30px;">
+          For ticket information email: <a
+            href="mailto:moodus.reservoir@gmail.com"
+          >
+            moodus.reservoir@gmail.com</a
+          >
+        </p>
+        <!--  -->
+      </div>
+    </div>
+  </div>
+  <hr class="container" />
   <div class="calendar-container">
     <header class="calendar-header">
       <h1 class="calendar-title">Events Calendar</h1>
-      
+
       <!-- Navigation -->
       <nav class="calendar-nav">
-        <a href={`?month=${offset-1}`} class="nav-btn nav-prev" aria-label="Previous month">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="m15 18-6-6 6-6"/>
+        <a
+          href={`?month=${offset - 1}`}
+          class="nav-btn nav-prev"
+          aria-label="Previous month"
+        >
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="m15 18-6-6 6-6"></path>
           </svg>
         </a>
-        <h2 class="current-month">{current.toLocaleString("default", { month: "long" })} {year}</h2>
-        <a href={`?month=${offset+1}`} class="nav-btn nav-next" aria-label="Next month">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="m9 18 6-6-6-6"/>
+        <h2 class="current-month">
+          {current.toLocaleString("default", { month: "long" })}
+          {year}
+        </h2>
+        <a
+          href={`?month=${offset + 1}`}
+          class="nav-btn nav-next"
+          aria-label="Next month"
+        >
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="m9 18 6-6-6-6"></path>
           </svg>
         </a>
       </nav>
@@ -59,44 +111,52 @@ const today = new Date().toISOString().split("T")[0];
     <div class="calendar">
       <!-- Day names -->
       <div class="weekdays">
-        {["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].map(d => 
-          <div class="weekday">{d}</div>
-        )}
+        {
+          ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((d) => (
+            <div class="weekday">{d}</div>
+          ))
+        }
       </div>
 
       <!-- Calendar days -->
       <div class="days-grid">
         <!-- Empty cells before first day -->
-        {Array.from({ length: firstDay }).map(() => 
-          <div class="day day-empty" />
-        )}
+        {
+          Array.from({ length: firstDay }).map(() => (
+            <div class="day day-empty" />
+          ))
+        }
 
         <!-- Days of the month -->
-        {Array.from({ length: daysInMonth }).map((_, i) => {
-          const day = i + 1;
-          const dateStr = `${year}-${(month + 1).toString().padStart(2,"0")}-${day.toString().padStart(2,"0")}`;
-          const dayEvents = eventsByDate[dateStr] || [];
-          const isToday = dateStr === today;
-          const hasEvents = dayEvents.length > 0;
-          
-          return (
-            <div class={`day ${isToday ? 'day-today' : ''} ${hasEvents ? 'day-has-events' : ''}`}>
-              <div class="day-number">{day}</div>
-              {dayEvents.length > 0 && (
-                <div class="events">
-                  {dayEvents.slice(0, 2).map(e => (
-                    <a href={`/events/${e.slug.current}`} class="event">
-                      {e.title}
-                    </a>
-                  ))}
-                  {dayEvents.length > 2 && (
-                    <div class="event-more">+{dayEvents.length - 2} more</div>
-                  )}
-                </div>
-              )}
-            </div>
-          );
-        })}
+        {
+          Array.from({ length: daysInMonth }).map((_, i) => {
+            const day = i + 1;
+            const dateStr = `${year}-${(month + 1).toString().padStart(2, "0")}-${day.toString().padStart(2, "0")}`;
+            const dayEvents = eventsByDate[dateStr] || [];
+            const isToday = dateStr === today;
+            const hasEvents = dayEvents.length > 0;
+
+            return (
+              <div
+                class={`day ${isToday ? "day-today" : ""} ${hasEvents ? "day-has-events" : ""}`}
+              >
+                <div class="day-number">{day}</div>
+                {dayEvents.length > 0 && (
+                  <div class="events">
+                    {dayEvents.slice(0, 2).map((e) => (
+                      <a href={`/events/${e.slug.current}`} class="event">
+                        {e.title}
+                      </a>
+                    ))}
+                    {dayEvents.length > 2 && (
+                      <div class="event-more">+{dayEvents.length - 2} more</div>
+                    )}
+                  </div>
+                )}
+              </div>
+            );
+          })
+        }
       </div>
     </div>
   </div>
@@ -105,12 +165,29 @@ const today = new Date().toISOString().split("T")[0];
     * {
       box-sizing: border-box;
     }
+    .events-hero {
+      text-align: center;
+      margin: 2rem 0;
+    }
+    .events-hero .hero-image {
+      width: 100%;
+      max-height: 600px;
+      object-fit: contain;
+    }
+
+    hr.container {
+      max-width: 1200px;
+      margin: 45px auto;
+      border: none;
+      border-top: 2px solid #e5e7eb;
+    }
 
     .calendar-container {
       max-width: 1200px;
       margin: 60px auto;
       padding: 1rem;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-family:
+        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
 
     .calendar-header {
@@ -120,7 +197,7 @@ const today = new Date().toISOString().split("T")[0];
     .calendar-title {
       font-size: 2rem;
       font-weight: 700;
-      color:var(--lake-deep-blue);
+      color: var(--lake-deep-blue);
       margin: 0 0 1.5rem 0;
       text-align: center;
     }
@@ -151,7 +228,7 @@ const today = new Date().toISOString().split("T")[0];
     }
 
     .nav-btn:hover {
-      background:var(--lake-seafoam);
+      background: var(--lake-seafoam);
       color: white;
       transform: translateY(-1px);
       box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
@@ -160,7 +237,7 @@ const today = new Date().toISOString().split("T")[0];
     .current-month {
       font-size: 1.5rem;
       font-weight: 600;
-      color:var(--lake-deep-blue);;
+      color: var(--lake-deep-blue);
       margin: 0;
     }
 
@@ -224,7 +301,7 @@ const today = new Date().toISOString().split("T")[0];
     }
 
     .day-today {
-      background:var(--lake-azure);
+      background: var(--lake-azure);
       color: white;
     }
 
@@ -234,7 +311,7 @@ const today = new Date().toISOString().split("T")[0];
     }
 
     .day-has-events .day-number {
-      color:var(--lake-azure);
+      color: var(--lake-azure);
       font-weight: 700;
     }
 
@@ -250,7 +327,7 @@ const today = new Date().toISOString().split("T")[0];
 
     .event {
       background: #dbeafe;
-      color:var(--lake-azure);
+      color: var(--lake-azure);
       padding: 0.25rem 0.5rem;
       border-radius: 6px;
       font-size: 0.75rem;
@@ -262,7 +339,7 @@ const today = new Date().toISOString().split("T")[0];
     }
 
     .event:hover {
-      background:var(--lake-azure);
+      background: var(--lake-azure);
       color: white;
       transform: translateY(-1px);
     }
@@ -366,7 +443,7 @@ const today = new Date().toISOString().split("T")[0];
       }
 
       /* Show only first event on very small screens */
-      .events .event:nth-child(n+2) {
+      .events .event:nth-child(n + 2) {
         display: none;
       }
 
@@ -436,4 +513,5 @@ const today = new Date().toISOString().split("T")[0];
         color: #d1d5db;
       }
     }
-  </style>
+  </style></Layout
+>
